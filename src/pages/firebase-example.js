@@ -19,13 +19,12 @@ export default () => {
   update(compile(aboutTemplate)({ title, loading, posts }));
 
   if (firebase) {
-    // firebase.auth().createUserWithEmailAndPassword('test@test.com', 'test333').catch((error) => {
-    //   // Handle Errors here.
-    //   const errorCode = error.code;
-    //   const errorMessage = error.message;
-    //   console.log(errorCode,errorMessage);
-    // });
-    
+    firebase.auth().createUserWithEmailAndPassword('test@test.com', 'test333').catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode, errorMessage);
+    });
+
     const database = firebase.database().ref('/posts');
     database.on('value', (snapshot) => {
       posts = snapshot.val();

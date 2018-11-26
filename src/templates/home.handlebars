@@ -1,4 +1,24 @@
 {{> header }}
+<div class="home_container">
+
+
+  <div class="cover">
+    <h1>Discover what's out there.</h1>
+    <form  class="flex-form">
+      <label for="from">
+        <i class="ion-location"></i>
+      </label>
+      <input type="search" placeholder="Waar zoek je een kot?">
+      <input type="submit" value="Search">
+    </form>
+    <div id="madeby">
+      <span>
+        Photo by <a href="https://unsplash.com/@benblenner" target="_blank">Ben Blennerhassett</a>
+      </span>
+    </div>
+  </div>
+
+</div>
 <div class="page home">
   <h1>Hello, {{user}}!</h1>
   <div class="body">
@@ -6,6 +26,123 @@
     Go to <a href="/about" data-path>About page</a><br />
     Go to <a href="/firebase" data-path>Firebase example page</a><br />
     Go to <a href="/mapbox" data-path>Mapbox example page</a><br />
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron accentPrimary-background">
+  <div class="container">
+    <h1>SCSS - Sassy CSS</h1>
+    <p>SCSS stands for 'Sassy CSS', referencing an earlier version of CSS preprocessing known as 'Sass'.</p>
+    <p>Think of SCSS like CSS with superpowers. One of which is variables that can be reused, and cascade.</p>
+    <p><a href="http://sass-lang.com/" target="_blank"><img src="http://paraisolinux.com/wp-content/uploads/2012/09/Sass_Logo.gif" /></a>
+    </p>
+    <p><a class="btn btn-primary btn-lg" role="button" href="http://sass-lang.com/" target="_blank">Learn more at Sass-lang &raquo;</a></p>
+  </div>
+</div>
+
+
+<div class="container">
+  <!-- Example row for Bootstrap grid -->
+  <div class="row">
+    <!-- Columns for 'small' viewports at 4 columns wide. Each row = 12 columns in total. -->
+    <div class="col-sm-4">
+      <h2 id="#firstColorBlock">Color Block</h2>
+      <div class="color-block accentPrimary-background"><h3>accentPrimary</h3></div>
+    </div>
+    <div class="col-sm-4">
+      <h2 id="#secondColorBlock">Color Block</h2>
+      <div class="color-block accentSecondary-background"><h3>accentSecondary</h3></div>
+   </div>
+    <div class="col-sm-4">
+      <h2 id="#thirdColorBlock">Color Block</h2>
+      <div class="color-block caution-background"><h3>caution</h3></div>
+    </div>
+  </div>
+</div>
+<br />
+<hr />
+<br />
+<div class="container">
+  <!-- Example buttons -->
+  <div class="row">
+    <div class="col-sm-4">
+      <h2>Button</h2>
+      <a class="btn btn-lg accentPrimary-background" role="button">accentPrimary</a>
+    </div>
+    <div class="col-sm-4">
+      <h2>Button</h2>
+      <a class="btn btn-lg accentSecondary-background" role="button">accentSecondary</a>
+    </div>
+    <div class="col-sm-4">
+      <h2>Button</h2>
+      <a class="btn btn-lg caution-background" role="button">caution</a>
+    </div>
+  </div>
+</div>
+<br />
+<hr />
+<br />
+<div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="panel panel-default" id="headings">
+            <div class="panel-heading ">Headings</div>
+            <div class="panel-body">
+            <h1 class="page-header">Page Header Colored Text <small>With Small Text</small></h1>
+            <h1>This is an h1 heading</h1>
+            <h2>This is an h2 heading</h2>
+            <h3>This is an h3 heading</h3>
+            <h4>This is an h4 heading</h4>
+            <h5>This is an h5 heading</h5>
+            <h6>This is an h6 heading</h6>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="panel panel-default" id="content-formatting">
+            <div class="panel-heading">Content Formatting
+            </div>
+            <div class="panel-body">
+            <p class="lead">This is a lead paragraph.</p>
+            <p>This is an <b>ordinary paragraph</b> that is <i>long enough</i> to wrap to <u>multiple lines</u> so that you can see how the line spacing looks.</p>
+            <p><small>This is text in a <code>small</code> wrapper. <abbr title="No Big Deal">NBD</abbr>, right?</small></p>
+            <hr>
+            <address>                <strong>Twitter, Inc.</strong><br>                795 Folsom Ave, Suite 600<br>                San Francisco, CA 94107<br>                <abbr title="Phone">P:</abbr> (123) 456-7890              </address>
+            <hr>
+            <blockquote>Here's what a blockquote looks like in Bootstrap. <small>Use <code>small</code> to identify the source.</small>
+            </blockquote>
+            <hr>
+            <div class="row">
+              <div class="col-xs-6">
+                <ul>
+                  <li>Normal Unordered List</li>
+                  <li>Can Also Work
+                    <ul>
+                      <li>With Nested Children</li>
+                    </ul>
+                  </li>
+                  <li>Adds Bullets to Page</li>
+                </ul>
+              </div>
+              <div class="col-xs-6">
+                <ol>
+                  <li>Normal Ordered List</li>
+                  <li>Can Also Work
+                    <ol>
+                      <li>With Nested Children</li>
+                    </ol>
+                  </li>
+                  <li>Adds Bullets to Page</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  <hr>
+
+  <footer>
+    <p>&copy; Company 2014</p>
+  </footer>
+</div> <!-- /container -->        
   </div>
 </div>
 {{> footer }}
