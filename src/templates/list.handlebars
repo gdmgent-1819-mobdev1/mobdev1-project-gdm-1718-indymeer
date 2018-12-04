@@ -8,11 +8,11 @@
 	
 	<div class="wrapper">
 		
-	<div class="register--content">
+	<div class="register--content animated" hidden >
 		
 		<div class="login--button">
 		<span>If you have an   account</span>
-			<a class="btn" data-popup-open="register-popup" href="#">Login</a>
+			<a class="btn" onclick="event.preventDefault();" data-popup-open="register-popup" href="#">Login</a>
 		</div>
 		
 		 <h1>Create a new account</h1>
@@ -25,17 +25,17 @@
 		</div>
 		
 		<div class="name">
-  <input type="text" class="inputText" required/>
+  <input type="text" class="inputText" id="userName" required/>
   <span class="floating-label">Your name</span>
 </div>
 		
 	<div class="email">
-  <input type="text" class="inputText" required/>
+  <input type="text" class="inputText" id="registMail" required/>
   <span class="floating-label">Your email</span>
 </div>
 
 <div class="password">
-  <input type="text" class="inputText" required/>
+  <input type="text" class="inputText" id="registPass" required/>
   <span class="floating-label">Your password</span>
 </div>
 
@@ -45,12 +45,30 @@
 		
 		
 		
-	<div class="login--content">
+	<div class="login--content animated" >
 		
 		<div class="login--button">
 		<span>Create a new  account</span>
-			<a class="btn-reg" data-popup-open="register-popup" href="#">Sing up</a>
+			<a class="btn-reg" onclick="event.preventDefault();" data-popup-open="register-popup" href="#">Sing up</a>
 		</div>
+		<div class="avatarContainer">
+    <h1>Image Upload 
+        <small>with preview</small>
+    </h1>
+    <div class="avatar-upload">
+        <div class="avatar-edit">
+            <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+            <label for="imageUpload"></label>
+            
+            
+        </div>
+        <div class="avatar-preview">
+            <div id="clock" style="background-image: url(http://i.pravatar.cc/500?img=7);">
+            </div>
+        </div>
+        
+    </div>
+</div>
 		<h1>Login to your account</h1>
 		<div class="social">
 			<a href=""><span class="facebook-icon"><i class="fa fa-facebook"></i></span>Login with <strong>Facebook</strong></a>
@@ -61,17 +79,17 @@
 		</div>
 		
 		<div class="email">
-  <input type="text" class="inputText" required/>
+  <input type="text" class="inputText" id="mailLogin" required/>
   <span class="floating-label">Your email</span>
 </div>
 
 <div class="password">
-  <input type="text" class="inputText" required/>
+  <input type="text" class="inputText" id="passLogin"  required/>
   <span class="floating-label">Your password</span>
 </div>
 		<span>Reset your pasword</span>
 
-		<input type="submit" class="register-buttton" value="Login" name="Login">
+		<input type="submit" id="loginBttn" class="register-buttton" value="Login" name="Login">
 		  
 		</div>
 	
@@ -84,8 +102,6 @@
 	
 	
 </div>
-<!-- Portfolio--><a id="portfolio" href="http://andytran.me/" title="View my portfolio!"><i class="fa fa-link"></i></a>
-<!-- CodePen--><a id="codepen" href="https://codepen.io/andytran/" title="Follow me!"><i class="fa fa-codepen"></i></a>
 <div class="page list">
   <h1>{{title}}</h1>
   <div class="body">

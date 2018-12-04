@@ -2,22 +2,24 @@
   <header>
     <h2><a href="#"><i class="ion-plane"></i> KotBnb</a></h2>
     <nav>
-      <ul>
+      <ul class="navUl">
         <li>
-          <a href="./" title="Hotels">Home</a>
+          <a href="/" data-navigo title="Hotels">Home</a>
         </li>
-         <li>
-          <a href="/rent" title="Hotels">Wordt verhuurder</a>
-        </li>
-        <li>
-          <a href="/about" data-path title="Flights">About</a>
+         <li id="rent">
+          <a href="/rent"  data-navigo title="Hotels">Wordt verhuurder</a>
         </li>
         <li>
-          <a href="/mapbox" data-path title="Tours">Mapbox</a>
+          <a href="/about" data-navigo title="Flights">About</a>
         </li>
         <li>
-          <a class="btn" href="/firebase" data-path title="Register / Log In">Register/Log In</a>
+          <a href="/mapbox" data-navigo title="Tours">Mapbox</a>
         </li>
+        <li class="listRegisterBtn">
+          <a class="btn" id="registerBtn" href="/firebase" data-navigo title="Register / Log In">Register/Log In</a>
+        </li>
+         
       </ul>
+    
     </nav>
   </header>

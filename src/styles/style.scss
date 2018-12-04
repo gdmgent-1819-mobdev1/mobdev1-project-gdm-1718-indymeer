@@ -11,76 +11,227 @@ $caution: #EEAA10;
 $success: #22AA55;
 $error: #f65327;
 
+
+
 /*** STYLING ***/ 
 
-/* BACKGROUND COLORS */
-.accentPrimary-background {
-// set background color of any element with this class
-background-color:$accentPrimary;
-// sets text inside of this class to white
-color: $white;
+.flex-container {
+	background-color: #eee;
+  width: 100%;
+  position: absolute;	
+	height: 100vh;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	flex-flow: row wrap;
+	flex-direction: flex-start;
 }
 
-.accentSecondary-background {
-background-color:$accentSecondary;
-color: $white;
+.product {
+	position: relative;
+	max-width: 330px;
+	margin: 20px;
+	border: 1px solid rgba(180,180,180,0.4);
+	height: auto;
+	background-color: #fff;
 }
 
-.caution-background {
-background-color:$caution;
-color: $white;
+.product:hover {
+	box-shadow: 0px 15px 11px -10px rgba(0,0,0,0.2);
 }
 
-/* selects direct child .panel-heading elements under parent .panel-default */
-.panel-default > .panel-heading {
-background-color: $accentPrimary;
-color: $white;
+.product-title {
+	padding: 1em;
+	margin: 0;
+	font-size: 16px;
 }
 
-/* DIV BLOCKS */
-.color-block {
-width: 100%;
-height: 100px;
-}
-
-/*** Typography ***/
-h1.page-header {
-color: $accentPrimary;
+.product-text {
+	padding: 0 1em;
 }
 
 
+.flex-container img {
+	margin: 0;
+  max-width: 100%;
+  height: 150px;
+  object-fit: cover;
+  width: 100%;
+}
 
-/* BACKGROUND COLORS */
-.accentPrimary-background {
-    // set background color of any element with this class
-    background-color:$accentPrimary;
-    // sets text inside of this class to white
-    color: $white;
-  }
-  
-  .accentSecondary-background {
-    background-color:$accentSecondary;
-    color: $white;
-  }
-  
-  .caution-background {
-    background-color:$caution;
-    color: $white;
-  }
-  
-  /* selects direct child .panel-heading elements under parent .panel-default */
-  .panel-default > .panel-heading {
-    background-color: $accentPrimary;
-    color: $white;
-  }
-  
-  /* DIV BLOCKS */
-  .color-block {
+
+.flex-container button {
+	position: relative;
+	width: 80%;
+	margin: 1em 10%;
+	padding: 12px 24px;
+	border: none;
+}
+
+
+.flex-container button:hover {
+	box-shadow: 0px 15px 11px -10px rgba(0,0,0,0.2);
+	cursor: pointer;
+}
+
+
+// rent
+
+/* Panels */
+.swipe {
+  width: 100%;
+  height: 100vh; /* "min-height" doesn't work on Firefox. */
+ background-image: url('https://source.unsplash.com/kVf7VRgg4p8/1920x1080');
+  background-size: cover;
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 100px;
+    height: 100%;
+    background: rgba(0, 0, 0, .5);
   }
-  
-  /*** Typography ***/
-  h1.page-header {
-    color: $accentPrimary;
+}
+
+.panel {
+  position: absolute;
+  width: 100%;
+  min-height: 100%;
+  top: 0;
+  left: 0;
+  padding: 20px;
+}
+
+.left {
+  left: -100%;
+}
+
+.right {
+  left: 100%;
+}
+
+/* Info */
+.info {
+  position: absolute;
+  width: 80%;
+  max-width: 500px;
+  bottom: 0%;
+  right: 0%;
+}
+
+.inner {
+  position: relative;
+  padding: 1.66em 3em;
+  background: #FFFFFF;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.info:before {
+  content: "";
+  position: absolute;
+  width: 65%;
+  height: 80%;
+  top: 0;
+  left: 0;
+  -webkit-transform: translate(-10px, -10px);
+  -ms-transform: translate(-10px, -10px);
+  -o-transform: translate(-10px, -10px);
+  transform: translate(-10px, -10px);
+  background: linear-gradient(-90deg, #c31432, #e33c56);
+}
+
+.button-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.gradient-button {
+  background-color: transparent;
+ background: linear-gradient(-90deg, #c31432, #e33c56);
+  background-blend-mode: overlay;
+  color: #fff;
+  border: none;
+  outline: 0 !important;
+  border-radius: 6px;
+  padding: 12px 30px;
+  font-size: 16px;
+  font-family: "Gudea", sans-serif;
+  box-shadow: 4px 6px 30px 0 rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease-in;
+}
+
+.gradient-button:hover,
+.gradient-button:focus {
+  background-color: rgba(80, 80, 80, 0.4);
+}
+
+.gradient-button-1 {
+  --color-from: #e052a0;
+  --color-to: #f15c41;
+}
+@media (max-width: 620px) {
+  body {
+    font-size: 13px;
+    line-height: 1.5em;
   }
+  .info {
+    position: absolute;
+    width: 100%;
+    max-width: 100%;
+    bottom: 0;
+    right: 0;
+  }
+
+  .inner {
+    padding: .5em 1.5em;
+    box-shadow: none;
+  }
+
+}
+
+
+.main-heading {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  padding: 0;
+  margin: auto;
+  height: 40px;
+  color: #fff;
+  font-weight: 300;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: 'Open sans', sans-serif;
+  font-weight: 300;
+  text-align: center;
+  letter-spacing: 9px;
+  text-transform: uppercase;
+}
+
+.main-heading.little{
+  top: 15%;
+}
+
+
+//filtershit
+
+#filter-bar{
+  width: 100%
+}
+#filter-bar button{
+      width: 30%;
+      float: left;
+      margin: 0.5%;
+}
+
+/* Different options for products with button click*/
+.un-selected{
+  opacity: 0.2;
+  display:none;
+}

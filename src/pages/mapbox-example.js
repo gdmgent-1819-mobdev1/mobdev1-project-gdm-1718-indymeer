@@ -8,11 +8,13 @@ import update from '../helpers/update';
 
 // Import the template to use
 const mapTemplate = require('../templates/page-with-map.handlebars');
+const { getInstance } = require('../firebase/firebase');
+
 
 export default () => {
   // Data to be passed to the template
   const title = 'Mapbox example';
-  update(compile(mapTemplate)({ title }));
+  update(compile(mapTemplate, getInstance)({ title }));
 
   // Mapbox code
   if (config.mapBoxToken) {
