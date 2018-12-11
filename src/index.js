@@ -1,7 +1,6 @@
 import Navigo from 'navigo';
 import handlebars, { compile } from 'handlebars';
 import './styles/main.sass';
-import './styles/style.scss';
 import routes from './routes';
 
 // Partials

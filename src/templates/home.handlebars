@@ -2,14 +2,13 @@
 <div class="home_container">
 
 
-  <div class="cover">
+  <div class="cover" id="cover">
     <h1>Discover what's out there.</h1>
-    <form  class="flex-form">
+    <form  id="flex-form" class="flex-form">
       <label for="from">
         <i class="ion-location"></i>
       </label>
-      <input type="text" id="search-attorneys" placeholder="Waar zoek je een kot?" >
-      <input type="submit" value="Search">
+      <input type="search" id="search-attorneys" placeholder="Waar zoek je een kot?" >
     </form>
     <div id="madeby">
       <span>
@@ -22,14 +21,17 @@
 
 <div class="container">
   <!-- example of multple grids, needs to put in for loop -->
-<div class="flex-container" id="flex-container">
-<div id="filter-bar">
+  <div id="filter-bar">
 	<button onclick="findItems('Studio')">Studio</button>
     <button onclick="findItems('Kamer')">Kamer</button>
-	<button onclick="findItems('Tops')">Tops</button>
-	<button onclick="findItems('Skirts')">Skirts</button>
+	<button onclick="findItems('low')">Low Price</button>
+	<button onclick="findItems('closeby')">Dichtbij</button>
 </div>
-</div> <!-- /container -->        
+<div class="flex-container" id="flex-container">
+
+</div>
+<div id="product-list"></div>
+ <!-- /container -->        
   </div>
 </div>
 {{> footer }}

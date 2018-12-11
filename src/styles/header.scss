@@ -123,6 +123,8 @@ a.btn:hover {
 .cover  {
   height: 100vh;
   width: 100%;
+  transition: linear .7s;
+  -ms-transition: linear .7s;
   background: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,0.05)), to(rgba(0,0,0,0)));
   background: -webkit-linear-gradient(top, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0) 100%);
   background: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0) 100%);

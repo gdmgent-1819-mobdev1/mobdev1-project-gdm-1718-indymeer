@@ -10,9 +10,17 @@ const firebase = getInstance();
 
 export default () => {
   // Data to be passed to the template
+  const database = firebase.database();
+  const studentRef = database.ref('Student');
+  const sellerRef = database.ref('Verkoper');
+  console.log(studentRef + ' ' + sellerRef);
+
   const name = 'Test inc.';
   // Return the compiled template to the router
   update(compile(aboutTemplate)({ name }));
+
+  // HOVER OPTIONS OVER PROFILE PIC
+
   function profileMore() {
     /* eslint no-console: ["error", { allow: ["warn", "error"] }] */
 
@@ -26,27 +34,24 @@ export default () => {
     });
   }
 
-
+// ONCLICK ADD USER AS ADMIN
   document.querySelector('.gradient-button').addEventListener('click', () => {
     firebase.auth().currentUser.getIdTokenResult()
-      .then((idTokenResult) => {
-        // Confirm the user is an Admin.
-        if (idTokenResult.claims.admin) {
-          // Show admin UI.
-          window.location.reload();
-          document.querySelector('.nameUser').innerHTML = 'testttt';
+      .then(() => {
+      
+          const currentUser = firebase.auth().currentUser;
+          const updates = {};
+          updates['/Verkoper/' + currentUser] = postData;
 
-          console.warn('yeah dikke swek');
-        } else {
-          // Show regular user UI.
-        }
+          return firebase.database().ref().update(updates);
+       
       })
       .catch((error) => {
         console.error(error);
       });
   });
 
-  // Start listing users from the beginning, 1000 at a time.
+// AUTH VOOR HEADER WEER TE GEVEN
 
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {

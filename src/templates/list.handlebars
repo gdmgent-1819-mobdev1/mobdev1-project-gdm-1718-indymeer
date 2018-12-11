@@ -5,8 +5,48 @@
 <!-- Mixins-->
 <!-- Pen Title-->
 <div class="formContent">
+	<div class="form-structor">
+	<div class="signup">
+		<h2 class="form-title" id="signup"><span>or</span>Sign up</h2>
+				<div class="avatarContainer">
 	
-	<div class="wrapper">
+    <div class="avatar-upload">
+        <div class="avatar-edit">
+            <input type='file' onchange='openFile(event)' id="imageUpload" accept=".png, .jpg, .jpeg" />
+            <label for="imageUpload"></label>
+            
+            
+        </div>
+        <div class="avatar-preview">
+            <div id="clock" style="background-image: url(https://4.bp.blogspot.com/-H232JumEqSc/WFKY-6H-zdI/AAAAAAAAAEw/DcQaHyrxHi863t8YK4UWjYTBZ72lI0cNACLcB/s1600/profile%2Bpicture.png);">
+            </div>
+        </div>
+        
+    </div>
+		</div>
+					<input type="checkbox" id="checkbox" name="admin" value="Admin"> Ik ben een verkoper <br>
+
+		<div class="form-holder">
+
+			<input type="text" class="input"  id="userName" placeholder="Name" />
+			<input type="email" class="input" id="registMail" placeholder="Email" />
+			<input type="password" class="input" id="registPass" placeholder="Password" />
+		</div>
+		<button class="submit-btn" id="submit-Sign">Sign up</button>
+	</div>
+	<div class="login slide-up">
+		<div class="center">
+			<h2 class="form-title" id="login"><span>or</span>Log in</h2>
+			<div class="form-holder">
+				<input type="email" class="input" id="mailLogin" placeholder="Email" />
+				<input type="password" class="input" id="passLogin" placeholder="Password" />
+			</div>
+			<button class="submit-btn" id="submit-Log">Log in</button>
+		</div>
+	</div>
+</div>
+</div>
+<!--	<div class="wrapper">
 		
 	<div class="register--content animated" hidden >
 		
@@ -17,7 +57,7 @@
 		
 		 <h1>Create a new account</h1>
 		<div class="social">
-			<a href=""><span class="facebook-icon"><i class="fa fa-facebook"></i></span>Register with <strong>Facebook</strong></a>
+			<a href=""><span class="google-icon"><i class="fa fa-google"></i></span>Register with <strong>Google</strong></a>
 		</div>
 		
 	  <div class="via-email">
@@ -33,13 +73,24 @@
   <input type="text" class="inputText" id="registMail" required/>
   <span class="floating-label">Your email</span>
 </div>
-
+	<div class="adres">
+  <input type="text" class="inputText" id="registMail" required/>
+  <span class="floating-label">Adres</span>
+</div>
+<div class="adres">
+  <input type="text" class="inputText" id="registMail" required/>
+  <span class="floating-label">Adres</span>
+</div>
+<div class="telefoon">
+<input type="tel" id="phone" name="phone">
+  <span class="floating-label">Telefoonnummer</span>
+</div>
 <div class="password">
   <input type="text" class="inputText" id="registPass" required/>
   <span class="floating-label">Your password</span>
 </div>
 
-		<input type="submit" class="register-buttton" value="Sing Up" name="register">
+		<input type="submit" class="register-buttton" value="Sign Up" name="register">
 		</div>	
 		
 		
@@ -49,29 +100,34 @@
 		
 		<div class="login--button">
 		<span>Create a new  account</span>
-			<a class="btn-reg" onclick="event.preventDefault();" data-popup-open="register-popup" href="#">Sing up</a>
+			<a class="btn-reg" onclick="event.preventDefault();" data-popup-open="register-popup" href="#">Sign up</a>
 		</div>
+	<!--
 		<div class="avatarContainer">
     <h1>Image Upload 
         <small>with preview</small>
     </h1>
+	
     <div class="avatar-upload">
         <div class="avatar-edit">
-            <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+            <input type='file' onchange='openFile(event)' id="imageUpload" accept=".png, .jpg, .jpeg" />
             <label for="imageUpload"></label>
             
             
         </div>
         <div class="avatar-preview">
-            <div id="clock" style="background-image: url(http://i.pravatar.cc/500?img=7);">
+            <div id="clock" style="background-image: url(https://4.bp.blogspot.com/-H232JumEqSc/WFKY-6H-zdI/AAAAAAAAAEw/DcQaHyrxHi863t8YK4UWjYTBZ72lI0cNACLcB/s1600/profile%2Bpicture.png);">
             </div>
         </div>
         
     </div>
+		
 </div>
+-->
+<!--
 		<h1>Login to your account</h1>
 		<div class="social">
-			<a href=""><span class="facebook-icon"><i class="fa fa-facebook"></i></span>Login with <strong>Facebook</strong></a>
+			<a href=""><span class="google-icon"><i class="fa fa-google"></i></span>Register with <strong>Google</strong></a>
 		</div>
 		
 		<div class="via-email">
@@ -102,19 +158,4 @@
 	
 	
 </div>
-<div class="page list">
-  <h1>{{title}}</h1>
-  <div class="body">
-    {{#if loading}}
-      Loading data, please wait...
-    {{else}}
-    <ul>
-      {{#each posts}}
-        <li>{{this.title}}</li>
-      {{/each}}
-    </ul>
-    {{/if}}
-    Go to <a href="/" data-path>Home page</a>
-  </div>
-</div>
-{{> footer }}
+-->

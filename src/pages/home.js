@@ -49,11 +49,29 @@ export default () => {
   `;
   }
   */
+
   // function to check when user is loggedin
 
 
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
+      const user_id = firebase.auth().currentUser.uid;
+      console.log(user_id);
+      const ref = firebase.database().ref(`accounts/${user_id}`);
+      ref.orderByChild('status').equalTo('verkoper').once('value').then((userSnapshot) => {
+        if (userSnapshot.exists()) {
+          //allow user perform action
+          console.log('it works');
+        } else {
+          console.log('it does not work');
+          // do not allow
+        }
+      })
+        .catch((error) => {
+          console.error(error);
+        });
+
+      console.log(user_id);
       const showProfile = document.querySelector('.listRegisterBtn');
       const registerbtn = document.querySelector('#registerBtn');
 
@@ -127,6 +145,7 @@ export default () => {
         const type = data[i].Type;
         const adres = `${data[i].Straat} ${data[i].Huisummer} ${data[i].Plaats}`;
         const prijs = data[i].Huurprijs;
+        const id = data[i]['﻿Kot id'];
 
 
         const main = createNode('div');
@@ -135,10 +154,13 @@ export default () => {
             <div id="imageGen"></div>
             <img src="https://source.unsplash.com/collection/494266/${getRandomNum()}" alt="image" />
             <div class="product-text">
+            <p> id: ${id}
              <p>Het gegeven adres: ${adres} <br> De prijs: ${prijs} </p>
              <button class="gradient-button gradient-button-1">View Product</button>
             </div>
-           </div>`;
+           </div>
+           
+           `;
         append(ul, main);
       }
     }
@@ -149,7 +171,7 @@ export default () => {
   }
 
   function addClass(ele, cls) {
-    if (!hasClass(ele, cls)) ele.className += ' ' + cls;
+    if (!hasClass(ele, cls)) ele.className += ` ${cls}`;
   }
 
   function removeClass(ele, cls) {
@@ -160,17 +182,24 @@ export default () => {
   }
 
   // eslint-disable-next-line no-unused-vars
-  const findItems = function (itemName) {
-    const p = document.getElementsByClassName('product-title');
-    // eslint-disable-next-line no-plusplus
-    for (let i = 0; i < p.length; i++) {
-      if (!(p[i].textContent === itemName)) {
-        addClass(p[i], 'un-selected');
+  const list = document.getElementById('flex-container');
+  const forms = document.forms;
+
+  const searchBar = forms['flex-form'].querySelector('input');
+  searchBar.addEventListener('keyup', (e) => {
+  document.getElementById('cover').style.height = '45vh';
+    const term = e.target.value.toLowerCase();
+    const books = list.getElementsByTagName('div');
+    Array.from(books).forEach((book) => {
+      const title = book.textContent;
+      if (title.toLowerCase().indexOf(e.target.value) != -1) {
+        book.style.display = 'block';
       } else {
-        removeClass(p[i], 'un-selected');
+        book.style.display = 'none';
       }
-    }
-  };
+    });
+  });
+
   document.addEventListener('click', (event) => {
     if (event.target) {
       if (event.target.id === 'logout') {
