@@ -11,9 +11,7 @@ const firebase = getInstance();
 export default () => {
   // Data to be passed to the template
   const database = firebase.database();
-  const studentRef = database.ref('Student');
-  const sellerRef = database.ref('Verkoper');
-  console.log(studentRef + ' ' + sellerRef);
+
 
   const name = 'Test inc.';
   // Return the compiled template to the router
@@ -35,21 +33,6 @@ export default () => {
   }
 
 // ONCLICK ADD USER AS ADMIN
-  document.querySelector('.gradient-button').addEventListener('click', () => {
-    firebase.auth().currentUser.getIdTokenResult()
-      .then(() => {
-      
-          const currentUser = firebase.auth().currentUser;
-          const updates = {};
-          updates['/Verkoper/' + currentUser] = postData;
-
-          return firebase.database().ref().update(updates);
-       
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  });
 
 // AUTH VOOR HEADER WEER TE GEVEN
 
@@ -62,7 +45,6 @@ export default () => {
       const email = user.email;
       const photo = user.photoURL;
 
-      document.querySelector('.nameUser').innerHTML = name;
       showProfile.innerHTML = ` <div class='header-right'>
       <div class='avatar-wrapper' id='avatarWrapper'>
         <img alt='Profile Photo' class='avatar-photo' height='28' src='https://4.bp.blogspot.com/-H232JumEqSc/WFKY-6H-zdI/AAAAAAAAAEw/DcQaHyrxHi863t8YK4UWjYTBZ72lI0cNACLcB/s1600/profile%2Bpicture.png' width='28'>
@@ -83,6 +65,8 @@ export default () => {
         </div>
       </div>
     </div>`;
+    document.querySelector('.nameUser').innerHTML = name;
+
 
       //  registerbtn.innerHTML = '';
       profileMore();

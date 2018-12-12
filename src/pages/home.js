@@ -55,24 +55,21 @@ export default () => {
 
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
+   
       const user_id = firebase.auth().currentUser.uid;
       console.log(user_id);
-      const ref = firebase.database().ref(`accounts/${user_id}`);
-      ref.orderByChild('status').equalTo('verkoper').once('value').then((userSnapshot) => {
-        if (userSnapshot.exists()) {
-          //allow user perform action
-          console.log('it works');
-        } else {
-          console.log('it does not work');
-          // do not allow
-        }
-      })
-        .catch((error) => {
-          console.error(error);
-        });
-
-      console.log(user_id);
-      const showProfile = document.querySelector('.listRegisterBtn');
+      // eslint-disable-next-line camelcase
+     const ref = firebase.database().ref(`accounts/${user_id}`);
+     ref.once('value', function(snapshot){
+      console.log(snapshot.val());
+      if(snapshot.val().status == 'verkoper'){
+        console.log('test');
+      }else{
+        console.log('beter proberen')
+      }
+     });
+  
+    const showProfile = document.querySelector('.listRegisterBtn');
       const registerbtn = document.querySelector('#registerBtn');
 
       const name = user.displayName;
@@ -142,15 +139,16 @@ export default () => {
     function create() {
       // eslint-disable-next-line space-unary-ops
       for (let i = 0; data.length; i += 1) {
-        const type = data[i].Type;
-        const adres = `${data[i].Straat} ${data[i].Huisummer} ${data[i].Plaats}`;
+        const adres = data[i].Straat + data[i].Huisummer + data[i].Plaats;
         const prijs = data[i].Huurprijs;
         const id = data[i]['﻿Kot id'];
+        const categorie = data[i].Type;
+
 
 
         const main = createNode('div');
         main.innerHTML = `<div class="product">
-            <p class="product-title">${type}</p>
+            <p class="product-title">${categorie}</p>
             <div id="imageGen"></div>
             <img src="https://source.unsplash.com/collection/494266/${getRandomNum()}" alt="image" />
             <div class="product-text">
@@ -166,20 +164,6 @@ export default () => {
     }
     create();
   });
-  function hasClass(ele, cls) {
-    return !!ele.className.match(new RegExp(`(\\s|^)${cls}(\\s|$)`));
-  }
-
-  function addClass(ele, cls) {
-    if (!hasClass(ele, cls)) ele.className += ` ${cls}`;
-  }
-
-  function removeClass(ele, cls) {
-    if (hasClass(ele, cls)) {
-      const reg = new RegExp(`(\\s|^)${cls}(\\s|$)`);
-      ele.className = ele.className.replace(reg, ' ');
-    }
-  }
 
   // eslint-disable-next-line no-unused-vars
   const list = document.getElementById('flex-container');
@@ -187,7 +171,7 @@ export default () => {
 
   const searchBar = forms['flex-form'].querySelector('input');
   searchBar.addEventListener('keyup', (e) => {
-  document.getElementById('cover').style.height = '45vh';
+    document.getElementById('cover').style.height = '45vh';
     const term = e.target.value.toLowerCase();
     const books = list.getElementsByTagName('div');
     Array.from(books).forEach((book) => {
