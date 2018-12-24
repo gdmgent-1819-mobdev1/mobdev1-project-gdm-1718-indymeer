@@ -74,7 +74,27 @@ $error: #f65327;
 	cursor: pointer;
 }
 
-
+#plus{ 
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #E53935;
+  position: fixed;
+  float: right;
+  bottom: 15px;
+  right: 15px;
+  box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.5);
+  text-align:center;
+  cursor: pointer;
+  color: #FFF;
+  /*Align Icon to Center of circle*/
+  text-align: center;
+  line-height: 60px; /*Height of container*/
+  vertical-align: middle;
+}
+#plus:hover{
+  background: #F44336;
+}
 // rent
 
 /* Panels */

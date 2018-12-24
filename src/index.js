@@ -6,9 +6,13 @@ import routes from './routes';
 // Partials
 const header = require('./partials/header.handlebars');
 const footer = require('./partials/footer.handlebars');
+const facebook = require('./partials/facebook.handlebars');
+
 
 // Register the partial components
 handlebars.registerPartial('header', compile(header)({ title: 'Just another web app' }));
+handlebars.registerPartial('facebook', compile(facebook)({ title: 'share' }));
+
 handlebars.registerPartial('footer', compile(footer)({ text: 'Template made with love by GDM Ghent' }));
 
 // Router logic to load the correct template when needed

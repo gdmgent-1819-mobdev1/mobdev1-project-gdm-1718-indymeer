@@ -17,6 +17,14 @@ export default () => {
   // Return the compiled template to the router
   update(compile(aboutTemplate)({ name }));
 
+  function createNode(element) {
+    return document.createElement(element);
+  }
+
+  function append(parent, el) {
+    return parent.appendChild(el);
+  }
+
   // HOVER OPTIONS OVER PROFILE PIC
 
   function profileMore() {
@@ -32,9 +40,8 @@ export default () => {
     });
   }
 
-// ONCLICK ADD USER AS ADMIN
 
-// AUTH VOOR HEADER WEER TE GEVEN
+  // AUTH VOOR HEADER WEER TE GEVEN
 
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
@@ -65,16 +72,16 @@ export default () => {
         </div>
       </div>
     </div>`;
-    document.querySelector('.nameUser').innerHTML = name;
+      document.querySelector('.nameUser').innerHTML = name;
 
 
       //  registerbtn.innerHTML = '';
       profileMore();
+      downFavo();
 
 
       //        console.log(user.displayName);
-    }
-    else {
+    } else {
       /*  document.getElementById('rent').addEventListener('click', () => {
           window.location.replace('/firebase');
         });
@@ -88,4 +95,41 @@ export default () => {
       listRegisterBtn.innerHTML = '<a class="btn" id="registerBtn" href="/firebase" data-navigo title="Register / Log In">Register/Log In</a>';
     }
   });
+
+  const ul = document.getElementById('posts');
+  const downFavo = () => {
+    const rootRef = database.ref();
+    const user_id = firebase.auth().currentUser.uid;
+
+    const urlRef = rootRef.child(`favorites/${user_id}`);
+    urlRef.once('value', (snapshot) => {
+      snapshot.forEach((childSnapshot) => {
+        const data = childSnapshot.val();
+        console.log(data);
+
+        const adres = data.Adres;
+        const prijs = data.Toilet;
+        const id = data.Douche;
+        const categorie = data.Type;
+        console.log(prijs);
+
+        const getRandomNum = () => Math.floor(Math.random() * 206);
+
+        const main = createNode('div');
+        main.innerHTML = `<div class="product">
+            <p class="product-title">${categorie}</p>
+            <div id="imageGen"></div>
+            <img src="https://source.unsplash.com/collection/494266/${getRandomNum()}" alt="image" />
+            <div class="product-text">
+            <p> id: ${id}
+             <p>Het gegeven adres: ${adres} ${prijs} <br> De prijs: </p>
+             <button class="gradient-button gradient-button-1 details" id="detailsList">View Product</button>
+            </div>
+           </div>
+           
+           `;
+        append(ul, main);
+      });
+    });
+  };
 };

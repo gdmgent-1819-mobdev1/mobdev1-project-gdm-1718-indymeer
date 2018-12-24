@@ -16,7 +16,7 @@ export default () => {
   const database = firebase.database();
   const studentRef = database.ref('Users');
   const sellerRef = database.ref('Verkoper');
-  console.log(`${studentRef } ${ sellerRef}`);
+  console.log(`${studentRef } ${sellerRef}`);
 
   const loading = true;
   const posts = {};

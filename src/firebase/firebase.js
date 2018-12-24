@@ -13,6 +13,7 @@ const config = {
 
 let instance = null;
 
+
 const initFirebase = () => {
   instance = firebaseInstance.initializeApp(config);
 };

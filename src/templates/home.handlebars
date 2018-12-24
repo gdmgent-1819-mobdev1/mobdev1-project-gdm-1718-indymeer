@@ -1,3 +1,4 @@
+{{> facebook }}
 {{> header }}
 <div class="home_container">
 
@@ -33,5 +34,109 @@
 <div id="product-list"></div>
  <!-- /container -->        
   </div>
+    <!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <form class="form" id="kotForm">
+      <h3 style="text-align: center">Form - Modal</h3>
+      <label>Type van het kot:</label>
+      <input type="text" id="kotType">
+      
+      <label>Oppervlakte:</label>
+      <input type="number" id="kotOpp">
+      
+      <label>Verdieping:</label>
+      <input type="number" id="kotVerdieping">
+     
+      <label>Aantal personen:</label>
+      <input type="number" id="kotPers">
+      
+      <label>Toilet:</label>
+      <select name="toiletlist" id="kotToilet">
+        <option value="prive">Prive</option>
+        <option value="gedeeld">Gedeeld</option>
+        <option value="nietA">Niet aanwezig</option>
+      </select>
+
+      <label>Douche:</label>
+      <select name="douchelist" id="kotDouche">
+        <option value="prive">Prive</option>
+        <option value="gedeeld">Gedeeld</option>
+        <option value="nietA">Niet aanwezig</option>
+      </select>
+
+      <label>Bad:</label>
+      <select name="badlist" id="kotBad">
+        <option value="prive">Prive</option>
+        <option value="gedeeld">Gedeeld</option>
+        <option value="nietA">Niet aanwezig</option>
+      </select>
+
+      <label>Keuken:</label>
+      <select name="keukenlist" id="kotKeuken">
+        <option value="prive">Prive</option>
+        <option value="gedeeld">Gedeeld</option>
+        <option value="nietA">Niet aanwezig</option>
+      </select>
+
+      <label>Bemeubeld:</label>
+      <select name="bemeubeldlist" id="kotBemeubeld">
+        <option value="ja">Ja</option>
+        <option value="nee">Nee</option>
+      </select>
+      
+      <label>Foto's:</label>
+      <input type="file" id="kotFoto">
+     
+      <label>Adres:</label>
+      <input type="text" id="kotAdres">
+
+       <label>Totaal aantal entiteiten in het pand:</label>
+      <input type="number" id="kotEntity">
+
+
+       <label>Vrije ingave - beschrijving - opmerkingen:</label>
+      <input type="text" id="kotCom">
+
+
+      <button id="kotSubmit">submit</button>
+      
+
+
+
+    </form>
+  </div>
+
+</div>
+
+
+<div id="myModal2" class="modal2">
+
+  <!-- Modal content -->
+  <div class="modal-content2">
+    <span class="close2">&times;</span>
+      <div id="details">
+          <div id="detType"></div>
+          <div id="detOpp"></div>
+          <div id="detVerdieping"></div>
+          <div id="detPersonen"></div>
+          <div id="detToilet"></div>
+          <div id="detDouche"></div>
+          <div id="detBad"></div>
+          <div id="detKeuken"></div>
+          <div id="detBemeubeld"></div>
+          <div id="detAdres"></div>
+          <div id="detEntity"></div>
+          <div id="detComment"></div>
+
+      </div>
+  </div>
+
+</div>
+          <div id="plus" class="hidden"><i class="fa fa-plus icon"></i></div>
+
 </div>
 {{> footer }}

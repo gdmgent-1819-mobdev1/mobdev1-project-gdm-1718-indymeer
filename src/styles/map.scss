@@ -1,0 +1,20 @@
+
+.mapbody{
+    height: 600px;
+    width: 100%;
+    position: relative;
+}
+#mapbox {   position: absolute;
+    left: 0;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+}
+
+
+a.mapboxgl-ctrl-logo{
+  display: none;
+}
+.mapboxgl-ctrl-attrib.mapboxgl-compact::after{
+  display: none;
+}
