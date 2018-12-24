@@ -16,6 +16,8 @@ const firebase = getInstance();
 export default () => {
   // Data to be passed to the template
   const title = 'Mapbox example';
+  const database = firebase.database();
+
   update(compile(mapTemplate, firebase)({ title }));
   // kotenopslag
   const koten = {};
@@ -131,7 +133,6 @@ export default () => {
         </div>
       </div>
     </div>`;
-      document.querySelector('.nameUser').innerHTML = name;
 
 
       //  registerbtn.innerHTML = '';
