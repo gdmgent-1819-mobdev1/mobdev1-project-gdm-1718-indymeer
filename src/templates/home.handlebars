@@ -1,8 +1,9 @@
 {{> facebook }}
-{{> header }}
+{{> header }} 
 <div class="home_container">
+  <div class="bodyCont">
 
-
+<div class="flex-grid">
   <div class="cover" id="cover">
     <h1>Discover what's out there.</h1>
     <form  id="flex-form" class="flex-form">
@@ -17,23 +18,28 @@
       </span>
     </div>
   </div>
-
 </div>
 
-<div class="container">
+
   <!-- example of multple grids, needs to put in for loop -->
+  
+<div class="flex-container " id="flex-container">
   <div id="filter-bar">
-	<button onclick="findItems('Studio')">Studio</button>
-    <button onclick="findItems('Kamer')">Kamer</button>
-	<button onclick="findItems('low')">Low Price</button>
-	<button onclick="findItems('closeby')">Dichtbij</button>
+    <p>Filter By</p>
+<select id="order">
+  <option value="1" selected>Unselected</option>
+  <option value="-1">Oppervlakte</option>
+  <option value="-2">Type</option>
+  <option value="-3">Afstand</option>
+  <option value="-4">kostPrijs </option>
+
+</select>
+
 </div>
-<div class="flex-container" id="flex-container">
 
 </div>
 <div id="product-list"></div>
  <!-- /container -->        
-  </div>
     <!-- The Modal -->
 <div id="myModal" class="modal">
 
@@ -42,64 +48,63 @@
     <span class="close">&times;</span>
     <form class="form" id="kotForm">
       <h3 style="text-align: center">Form - Modal</h3>
-      <label>Type van het kot:</label>
-      <input type="text" id="kotType">
+
+      <input type="text" id="kotType" placeholder="Type van het kot">
+
+      <div class="inlineFlex">
+      <input type="number" id="kotEntity" placeholder="Tot. entiteiten">
+      <input type="number" id="kotPrijs" placeholder="Huurprijs">
+      </div>
+      <div class="inlineFlex">
+      <input type="number" id="kotWaarborg" placeholder="Waarborg">
+      <input type="number" id="kotOpp" placeholder="Oppervlakte">
+      </div>
+      <div class="inlineFlex">
+      <input type="number" id="kotVerdieping" placeholder="Verdieping">
+      <input type="number" id="kotPers" placeholder="Aantal personen">
+      </div>
       
-      <label>Oppervlakte:</label>
-      <input type="number" id="kotOpp">
-      
-      <label>Verdieping:</label>
-      <input type="number" id="kotVerdieping">
-     
-      <label>Aantal personen:</label>
-      <input type="number" id="kotPers">
-      
-      <label>Toilet:</label>
-      <select name="toiletlist" id="kotToilet">
+      <input type="text" id="kotAdres" placeholder="Adres">
+
+      <select name="toiletlist" id="kotToilet" placeholder="Toilet">
+        <option value="" disabled selected hidden>Toilet</option>
         <option value="prive">Prive</option>
         <option value="gedeeld">Gedeeld</option>
-        <option value="nietA">Niet aanwezig</option>
+        <option value="niet aanwezig">Niet aanwezig</option>
       </select>
 
-      <label>Douche:</label>
-      <select name="douchelist" id="kotDouche">
+      <select name="douchelist" id="kotDouche" placeholder="Douche">
+        <option value="" disabled selected hidden>Douche</option>
         <option value="prive">Prive</option>
         <option value="gedeeld">Gedeeld</option>
-        <option value="nietA">Niet aanwezig</option>
+        <option value="niet aanwezig">Niet aanwezig</option>
       </select>
 
-      <label>Bad:</label>
-      <select name="badlist" id="kotBad">
+      <select name="badlist" id="kotBad"placeholder="Bad">
+        <option value="" disabled selected hidden>Bad</option>
         <option value="prive">Prive</option>
         <option value="gedeeld">Gedeeld</option>
-        <option value="nietA">Niet aanwezig</option>
+        <option value="niet aanwezig">Niet aanwezig</option>
       </select>
 
-      <label>Keuken:</label>
-      <select name="keukenlist" id="kotKeuken">
+      <select name="keukenlist" id="kotKeuken" placeholder="Keuken">
+        <option value="" disabled selected hidden>Keuken</option>
         <option value="prive">Prive</option>
         <option value="gedeeld">Gedeeld</option>
-        <option value="nietA">Niet aanwezig</option>
+        <option value="niet aanwezig">Niet aanwezig</option>
       </select>
 
-      <label>Bemeubeld:</label>
-      <select name="bemeubeldlist" id="kotBemeubeld">
+      <select name="bemeubeldlist" id="kotBemeubeld" placeholder="Bemeubeld">
+        <option value="" disabled selected hidden>Bemeubeld</option>
         <option value="ja">Ja</option>
         <option value="nee">Nee</option>
       </select>
-      
-      <label>Foto's:</label>
-      <input type="file" id="kotFoto">
+      <label class="file" title=""><input type="file"  id="kotFoto" onchange="this.parentNode.setAttribute('title', this.value.replace(/^.*[\\/]/, ''))" /></label>
+
      
-      <label>Adres:</label>
-      <input type="text" id="kotAdres">
-
-       <label>Totaal aantal entiteiten in het pand:</label>
-      <input type="number" id="kotEntity">
 
 
-       <label>Vrije ingave - beschrijving - opmerkingen:</label>
-      <input type="text" id="kotCom">
+      <input type="text" id="kotCom" placeholder="Vrije ingave - beschrijving - opmerkingen">
 
 
       <button id="kotSubmit">submit</button>
@@ -117,26 +122,48 @@
 
   <!-- Modal content -->
   <div class="modal-content2">
-    <span class="close2">&times;</span>
       <div id="details">
-          <div id="detType"></div>
-          <div id="detOpp"></div>
-          <div id="detVerdieping"></div>
-          <div id="detPersonen"></div>
-          <div id="detToilet"></div>
-          <div id="detDouche"></div>
-          <div id="detBad"></div>
-          <div id="detKeuken"></div>
-          <div id="detBemeubeld"></div>
-          <div id="detAdres"></div>
-          <div id="detEntity"></div>
-          <div id="detComment"></div>
+        <div class="product">
+              <span class="close2">&times;</span>
+
+              <img src="" id="detImg" alt="image" />
+              <div class="product-text">
+              <div class="profileInfo">
+              <img alt='Profile Photo' class='avatar-photo' height='28' src='https://4.bp.blogspot.com/-H232JumEqSc/WFKY-6H-zdI/AAAAAAAAAEw/DcQaHyrxHi863t8YK4UWjYTBZ72lI0cNACLcB/s1600/profile%2Bpicture.png' width='28'>
+              <div class="posted-name" id="postName"></div>
+              <div class="Type" id="Type">    
+              </div>
+              </div>
+
+               <p>
+                <div id="detOpp"></div>
+                <div id="detVerdieping"></div>
+                <div id="detPersonen"></div>
+                <div id="detToilet"></div>
+                <div id="detDouche"></div>
+                <div id="detBad"></div>
+                <div id="detKeuken"></div>
+                <div id="detBemeubeld"></div>
+                <div id="detAdres"></div>
+                <div id="detEntity"></div>
+                <div id="detComment"></div> </p>
+               <hr>
+               <div class='icons'>
+               <div data-href="https://developers.facebook.com/docs/plugins/" class="fb-share-button"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" ><i class="fa fa-share-alt iconColor"></i></a></div>
+               <a href="/#chat" id="chatUser"><i class="fa fa-comment-o iconColor"></i></a>
+
+               <button class="heartBtn"><i class="fa fa-heart-o iconColor" id="favorite"></i></button>
+               </div>
+             
+
+              </div>
+             </div>
 
       </div>
   </div>
 
 </div>
           <div id="plus" class="hidden"><i class="fa fa-plus icon"></i></div>
-
+</div>
 </div>
 {{> footer }}

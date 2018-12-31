@@ -27,9 +27,8 @@ routes.forEach((route) => {
 
 // This catches all non-existing routes and redirects back to the home
 router.notFound(() => {
-  router.navigate('/#');
+  router.navigate('/');
 });
 router.resolve();
 window.onload = () => {
-  router.navigate(window.location.hash.split('/')[1]);
 };

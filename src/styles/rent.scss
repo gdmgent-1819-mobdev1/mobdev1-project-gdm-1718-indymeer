@@ -1,27 +1,36 @@
+@import "./var.scss";
+
+#userProfile img{
+  height: 300px;
+    background-size: cover;
+    position: relative;
+}
 .profileContainer {
-    width: 75%;
-    text-align: center;
-    position: absolute;
-    top: 30%;
+    width: 100%;
+    position: absolute !important;
     z-index: 25;
     margin: 0 auto;
-    left: 20%;
+   
   }
+  .profileContainer button{
+    background: none !important;
+    border: none;
+    padding: 0 !important;
+  }
+.profileContainer img{
+  margin: 0;
+  max-width: 100%;
+  height: 200px;
+  object-fit: cover;
+  width: 100%;
+}
   
   .profileContainer > div {
     top: 10%;
 
-    width: 80%;
+    width: 100%;
     display: inline-block;
-    border-radius: 35px;
      }
-  
-  .profileContainer .left {
-    background-color: #faf8ff;
-    margin-right: 35px;
-    margin-left: 100% !important;
-    position: absolute;
-  }
   
   .profileContainer .right {
     margin-left: 35px;
@@ -32,17 +41,79 @@
     border-radius: 50px;
  
   }
-  
-  .cam {
-    width: 6px;
-    height: 6px;
-    background-color: #465566;
-    position: absolute;
-    top: 4.5px;
-    right: 110px;
-    border-radius: 50%;
+  .profileContainer .nameUser{
+    font-size: $title;
+    color: $darkBody;
   }
+
+  .profileContainer .school{
+    font-size: $bodyTitle;
+  }
+
+  .sidebar-social .chatColor{
+    color: #3ACCE1;
+  }
+  .sidebar-social .profileColor{
+    color: #C840E9;
+
+  }
+  .sidebar-social .mapColor{
+    color: #665EFF;
+
+  }
+  .profileContainer .headerInfo{
+    margin: 0 auto;
+    width: 90%;
+    padding-top: 20px;
+
+
+  }
+  .profileContainer .product #chatUser {
+    margin-left: 92%;
+    font-size: inherit;
+}
   
+  .sidebar-social {
+    margin-top: 10px;
+    padding: 0;
+    box-shadow: $Shadow;
+    border-radius: 11px;
+}
+
+.sidebar-social ul {
+    margin: 0;
+    padding: 5px;
+}
+
+.sidebar-social li {
+    text-align: center;
+    width: 31.9%;
+    margin-bottom: 3px!important;
+    background-color: #fff;
+    display: inline-block;
+    font-size: 10px;
+}
+
+.sidebar-social a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    font-size: 14px;
+    color: #444;
+    text-decoration: none;
+}
+
+.sidebar-social i {
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    font-size: 20px;
+}
+
+
   /*.profileContainer .up:before {
     content: "";
     height: 60px;
@@ -66,43 +137,17 @@
     display: inline-block;
     border-radius: 50px;
   }*/
-  
-  .profileContainer .left .top {
-    background-image:linear-gradient(-90deg, #c31432, #e33c56);
-    height: 135px;
-  }
-  
-  .profileContainer .left .top ul li {
-    display: inline-block;
-    margin-top: 8px;
-    color: #f8effc;
-  }
-  
-  .left .top ul li:first-of-type {
-    float: left;
-    font-size: 11px;
-    margin-left: 22px;
-  }
-  
-  .left .top ul li:last-of-type {
-    float: right;
-    font-size: 10px;
-    margin-right: 15px;
-  }
-  
-  .left .top ul li:last-of-type span:not(:last-of-type) {
-    margin-right: 1px;
-  }
+
   
   .profileContainer .left .profile-info {
     background-color: #fff;
-    width: 260px;
+    width: 100%;
     margin: 0 auto;
     padding-bottom: 10px;
-    border-radius: 7px;
-    position: relative;
+    border-radius: 12px;
+    position: absolute;
     top: -64px;
-    box-shadow: -1px 5px 23px -2px rgba(0, 0, 0, 0.33);
+    box-shadow: $Shadow;
   }
   /*
   .profileContainer .left .profile-info:before{
@@ -120,342 +165,37 @@
 }
 */
 
-  
-  .profileContainer .left .profile-info ul li:first-of-type {
-    width: 70px;
-    height: 70px;
-    position: relative;
-    top: -30px;
-    right: -35%;
-  }
-  
-  .profileContainer .left .profile-info ul li:first-of-type img {
-    width: 61px;
-    height: 61px;
-    border-radius: 50%;
-    border: 2px solid #f8effc;
-    box-shadow: -1px 5px 24px -2px rgba(0, 0, 0, 0.33);
-  }
-  
-  .profileContainer .left .profile-info ul li:nth-of-type(2) {
-    color: #3d3b3b;
-    margin-top: -30px;
-    font-size: 9px;
-    margin-bottom: 6px;
-  }
-  
-  .profileContainer .left .profile-info ul li:nth-of-type(3),
-  .profileContainer .left .profile-info ul li:nth-of-type(4) {
-    color: #7f8c8d;
-    font-size: 10px;
-    margin-bottom: 3px;
-  }
-  
-  .profileContainer .left .profile-info ul li:nth-of-type(5) {
-    font-size: 10px;
-    margin: 9px 0 8px 74px;
-    background-image: linear-gradient(-90deg, #c31432, #e33c56);
-    width: 43%;
-    padding: 6px;
-    border-radius: 20px;
-    color: #f8effc;
-    cursor: pointer;
-    box-shadow: -1px 5px 24px -2px rgba(0, 0, 0, 0.33);
-  }
-  
-  .profileContainer .left .profile-info ul li:last-of-type a {
-    color: #bdc3c7;
-    font-size: 12px;
-  }
-  
-  .profileContainer .left .profile-info ul li:last-of-type a:not(:last-of-type) {
-    margin-right: 9px;
-  }
-  
-  .profileContainer .left .profile-info ul li:last-of-type a:hover {
-    color: #7160fc;
-  }
-  
-  .dots i,
-  .one .dots i {
-    color: #dcdcdc;
-    font-size: 12px;
-    position: absolute;
-    top: 15px;
-    right: 10px;
-    z-index: 999999;
-    cursor: pointer;
-  }
-  
-  .posts .dots i {
-    color: #e8e8e8;
-  }
-  
-  .profileContainer .left .numbers {
-    position: relative;
-    top: -46px;
-    padding: 0 12px;
-    margin-bottom: 4px;
-    width: 308px;
-    margin: 0 auto;
-  }
-  
-  .profileContainer .left .numbers ul li {
-    display: inline-block;
-    height: 60px;
-    font-size: 8px;
-    color: #7f8c8d;
-    width: 77px;
-    height: 48px;
-    padding-top: 7px;
-    border-radius: 5px;
-    text-transform: uppercase;
-    cursor: pointer;
-  }
-  
-  .profileContainer .left .numbers ul li:first-of-type {
-    float: left;
-    background-color: #fff;
-    box-shadow: -1px 5px 20px -5px rgba(0, 0, 0, 0.33);
-    color: #3d3b3b;
-  }
-  
-  .profileContainer .left .numbers ul li:last-of-type {
-    float: right;
-  }
-  
-  .profileContainer .left .numbers ul li span {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 5px;
-    font-size: 14px;
-  }
-  
-  .profileContainer .left .numbers ul li:hover {
-    background-color: #fff;
-    box-shadow: -1px 5px 20px -5px rgba(0, 0, 0, 0.33);
-    color: #3d3b3b;
-  }
-  
-  .profileContainer .left .posts {
-    position: relative;
-    border-radius: 5px;
-  }
-  
-  .profileContainer .left .posts .one {
-    position: relative;
-    width: 100%;
-    height: 180px;
-    background: url("https://st2.depositphotos.com/3391779/6445/v/950/depositphotos_64455597-stock-illustration-flat-design-vector-illustration-of.jpg")
-      center center no-repeat;
-    background-size: cover;
-    border-radius: 5px 5px 0 0;
-  
-    &:before {
-      content: "";
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      background-image: linear-gradient(
-        to left,
-        #7160fc,
-        #895ef7,
-        #9d5cf1,
-        #ad5beb,
-        #bc5ae5
-      );
-      opacity: 0.6;
-      border-radius: 5px 5px 0 0;
-    }
-  }
-  
-  .profileContainer .left .posts .one p {
-    position: relative;
-    z-index: 1111;
-    text-align: left;
-    padding-left: 10px;
-    color: #f1f5fe;
-    font-size: 14px;
-  }
-  
-  .profileContainer .left .posts .one p:first-of-type {
-    color: #00d2d3;
-    font-size: 11px;
-    padding-top: 110px;
-    padding-bottom: 10px;
-  }
-  
-  .profileContainer .left .posts .two {
-    overflow: hidden;
-    padding: 10px;
-    border-radius: 0 0 5px 5px;
-    box-shadow: -1px 5px 23px -2px rgba(0, 0, 0, 0.33);
-  }
-  
-  .profileContainer .left .posts .two ul li {
-    display: inline-block;
-  }
-  
-  .profileContainer .left .posts .two ul:first-of-type li {
-    float: left;
-  }
-  
-  .profileContainer .left .posts .two ul:first-of-type li:first-of-type {
-    width: 35px;
-    height: 35px;
-  }
-  
-  .profileContainer .left .posts .two ul:first-of-type li:first-of-type img {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-  }
-  
-  .profileContainer
-    .left
-    .posts
-    .two
-    ul:first-of-type
-    li:last-of-type
-    span:first-of-type {
-    color: #000;
-    display: block;
-    text-align: left;
-    font-size: 9px;
-    font-weight: bold;
-    padding-top: 7px;
-    padding-left: 8px;
-  }
-  
-  .posts .two ul:first-of-type li:last-of-type span:nth-of-type(2),
-  .posts .two ul:first-of-type li:last-of-type span:last-of-type {
-    color: #bdc3c7;
-    text-align: left;
-    font-size: 6px;
-    font-weight: bold;
-    position: relative;
-    top: -5px;
-    right: -4px;
-  }
-  
-  .profileContainer .left .posts .two ul:last-of-type li {
-    float: right;
-    font-size: 8px;
-    padding: 2px 6px;
-    border-radius: 15px;
-    height: 16px;
-    margin-top: 11px;
-  }
-  
-  .posts .two ul:last-of-type li:first-of-type {
-    border: 1px solid #7f8c8d;
-  }
-  
-  .posts .two ul:last-of-type li:last-of-type {
-    margin-right: 5px;
-    color: #fff;
-    background-image: linear-gradient(
-      to left,
-      #7160fc,
-      #895ef7,
-      #9d5cf1,
-      #ad5beb,
-      #bc5ae5
-    );
-    border: 1px solid transparent;
-  }
-  
-  .profileContainer .left .posts .two ul:last-of-type li:hover {
-    color: #fff;
-    background-image: linear-gradient(
-      to left,
-      #7160fc,
-      #895ef7,
-      #9d5cf1,
-      #ad5beb,
-      #bc5ae5
-    );
-    border: 1px solid transparent;
-  }
-  
-  .profileContainer .left .bottom ul li {
-    display: inline-block;
-    position: relative;
-    top: -18px;
-    color: #7f8c8d;
-  }
-  
-  .profileContainer .left .bottom ul li:not(:last-of-type) {
-    margin-right: 40px;
-  }
-  
-  .profileContainer .left .bottom ul li:first-child,
-  .profileContainer .left .bottom ul li:hover {
-    color: #bb5ae5;
-  }
-  
-  .profileContainer .left .bottom ul li:first-child:after,
-  .profileContainer .left .bottom ul li:hover:after {
-    content: "";
-    background-color: #bb5ae5;
-    height: 6px;
-    width: 6px;
-    display: block;
-    border-radius: 50%;
-    position: relative;
-    top: 3px;
-    right: -6px;
-  }
-  
-  .profileContainer .bottom:after {
-    content: "";
-    display: inline-block;
-    width: 70px;
-    height: 2px;
-    background-color: hsl(0, 0%, 91%);
-    border-radius: 50px;
-    position: absolute;
-    bottom: 8px;
-    right: 105px;
-  }
-  
-  .mystyle {
-    color: red;
-    font-size: 30px;
-  }
+
   
 
-  @media (max-width: 718px) {
-    .profileprofileContainer .left {
-      background-color: #faf8ff;
-      margin-right: 70px;
-      margin-bottom: 50px;
-    }
-  
-    .profileprofileContainer .right {
-      margin-left: 0;
-    }
-  }
-  
-
-  .modal,  .modal2 {
+  .modal, .modal2 {
     display: none; 
     position: fixed; 
     z-index: 28; 
-    padding-top: 100px; 
+    padding-top: 62px;
     left: 0;
     top: 0;
     width: 100%; 
     height: 100%; 
     overflow: auto; 
     background-color: rgb(0,0,0); 
-    background-color: rgba(0,0,0,0.4); 
+    background-color: rgba(0, 0, 0, 0.13);
 }
+.modal-content2{
+      /* background-color: #fefefe; */
+      margin: auto;
+      /* padding: 20px; */
+      /* border: 1px solid #888; */
+      width: 100%;
+      max-width: 400px;
+      min-height: 446px;
+}
+.modal-content2 .product{
+  min-height: 542px;
 
+}
 /* Modal Content */
-.modal-content,.modal-content2 {
+.modal-content, {
     background-color: #fefefe;
     margin: auto;
     padding: 20px;
@@ -464,13 +204,24 @@
     max-width: 400px;
     min-height: 400px;
 }
+#kotForm select{
+  padding: 0;
+}
 
 /* The Close Button */
-.close, .close2 {
+.close{
     color: #aaaaaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
+}
+.close2{
+  color: #ffffff;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  position: absolute;
+  right: 0;
 }
 
 .close:hover,
@@ -484,6 +235,87 @@
 .form{
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+}
+
+.modal input, .modal select{
+  margin: 5px;
+  height: 26px;
+  border-radius: 4px;
+  border: 1px solid #dbdbdb;
+}
+.modal input{
+  padding: 10px;
+}
+
+.modal .inlineFlex{
+  display: inline-flex;
+}
+.modal .inlineFlex input{
+  width: 50%;
+}
+
+label.file input {position:absolute; width:0; overflow:hidden; opacity:0;}
+label.file {
+  width:0%; /* Use for fluid design */
+  min-width:98%;
+  height:30px;
+  line-height:28px!important;
+  cursor:pointer;
+  position:relative;
+  display:inline-block;
+  white-space:nowrap;
+  font-family:sans-serif;
+  text-align:right;
+}
+label.file:before {
+  content:"No file chosen";
+  display:block;
+  position:absolute;
+  box-sizing:border-box;
+  width:100%;
+  height:inherit;
+  padding:0 84px 0 10px;
+  border:0px solid #e8eeef;
+  border-width:2px 0px 2px 2px;
+  border-radius:3px 0 0 3px;
+  background-color:#fff;
+  color:#a0b7c5;
+  font-size:12px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  text-align:center;
+  vertical-align:middle;
+}
+label.file[title]:not([title=""]):before{
+  content:attr(title);
+  color:#162f44;
+}
+label.file:after {
+  content:"BROWSE";
+  display:inline-block;
+  position:relative;
+  box-sizing:border-box;
+  width:74px;
+  height:inherit;
+  padding:0 4px;
+  border-radius:0 3px 3px 0;
+  background-color: $red;
+  color:#fff;
+  overflow:hidden;
+  font-size:9px;
+  font-weight:bold;
+  text-overflow:ellipsis;
+  text-align:center;
+  vertical-align:middle;
+}
+
+.modal button{
+  width: 200px;
+  margin: 10px auto;
+  background-color: $red;
+  color: #fefefe;
+  border: none;
+  height: 2rem;
+  border-radius: 10px;
 }

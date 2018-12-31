@@ -26,76 +26,91 @@ export default () => {
   }
 
   // HOVER OPTIONS OVER PROFILE PIC
+  document.getElementById('openMenu').onclick = function () {
+    const element = document.querySelector('.content');
+    element.classList.remove('no-animation');
+    element.classList.toggle('shrink');
+  };
 
-  function profileMore() {
-    /* eslint no-console: ["error", { allow: ["warn", "error"] }] */
+  // WHEN USER IS ACTIVE
 
-    console.warn('Log a warn level message.');
-    const showProfile = document.querySelector('.header-right');
-    showProfile.addEventListener('mouseover', () => {
-      document.getElementById('dropdownWrapper').style = 'opacity:1; visibility:inherit;';
-    });
-    showProfile.addEventListener('mouseout', () => {
-      document.getElementById('dropdownWrapper').style = '';
-    });
+  /*
+  function rentKot() {
+    document.getElementById('rentPage').innerHTML = `
+
+  `;
   }
+  */
 
+  // function to check when user is loggedin
 
-  // AUTH VOOR HEADER WEER TE GEVEN
 
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      const showProfile = document.querySelector('.listRegisterBtn');
-      // const registerbtn = document.querySelector('#registerBtn');
+      const user_id = firebase.auth().currentUser.uid;
+      // eslint-disable-next-line camelcase
+      const ref = firebase.database().ref(`accounts/${user_id}`);
+      ref.once('value', (snapshot) => {
+        if (snapshot.val().status === 'verkoper') {
+        } else {
+        }
+      });
+
+      const showProfile = document.querySelector('.userDetails');
+      const menu = document.querySelector('.menu');
+      const userProfile = document.querySelector('.nameUser');
+      const school = document.querySelector('.school');
 
       const name = user.displayName;
       const email = user.email;
-      const photo = user.photoURL;
+      const opleiding = user.school;
 
-      showProfile.innerHTML = ` <div class='header-right'>
-      <div class='avatar-wrapper' id='avatarWrapper'>
-        <img alt='Profile Photo' class='avatar-photo' height='28' src='https://4.bp.blogspot.com/-H232JumEqSc/WFKY-6H-zdI/AAAAAAAAAEw/DcQaHyrxHi863t8YK4UWjYTBZ72lI0cNACLcB/s1600/profile%2Bpicture.png' width='28'>
-        <svg class='avatar-dropdown-arrow' height='24' id='dropdownWrapperArrow' viewbox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
-          <title>Dropdown Arrow</title>
-          <path d='M12 14.5c-.2 0-.3-.1-.5-.2l-3.8-3.6c-.2-.2-.2-.4-.2-.5 0-.1 0-.3.2-.5.3-.3.7-.3 1 0l3.3 3.1 3.3-3.1c.2-.2.5-.2.8-.1.3.1.4.4.4.6 0 .2-.1.4-.2.5l-3.8 3.6c-.1.1-.3.2-.5.2z'></path>
-        </svg>
-      </div>
-      <div class='dropdown-wrapper' id='dropdownWrapper' style='width: 256px'>
-        <div class='dropdown-profile-details'>
-          <span class='dropdown-profile-details--name'>${name}</span>
-          <span class='dropdown-profile-details--email'>${email}</span>
-        </div>
-        <div class='dropdown-links'>
-          <a href='#'>Profile</a>
-          <a href='#'>Messages</a>
-          <a href='#' id="logout">Sign out</a>
-        </div>
-      </div>
-    </div>`;
-      document.querySelector('.nameUser').innerHTML = name;
+      userProfile.innerHTML = name;
+      school.innerHTML = opleiding;
 
+      showProfile.innerHTML = `
+      <h2 class="userName">${name}<h2>
+        <p class="userEmail">${email}</p>`;
 
-      //  registerbtn.innerHTML = '';
-      profileMore();
+      menu.innerHTML = `
+      <ul>
+        <li class="contacts bold">
+                    <a href="/#/" data-navigo title="Hotels">Home</a>
+        </li>
+
+        <li class="partners bold">
+          <a href="/#/rent"  data-navigo title="Hotels">Profile</a>
+        </li>
+
+        <li class="settings bold"> 
+           <a href="/#/mapbox" data-navigo title="About">Map</a>
+        </li>
+
+        <li class="eraseDb light"> 
+          <a href="/#/chat" data-navigo title="Chat">chat</a>
+        </li>
+        <li class="eraseTags light">
+          <a href="/#/tinder" data-navigo title="tinder">tinder</a>
+        </li>
+        <li class="logOut"><a href="#" id="logout"> Log Out</a></li>      </ul>
+      `;
+
+      //rentKot();
       downFavo();
 
 
       //        console.log(user.displayName);
-    } else {
-      /*  document.getElementById('rent').addEventListener('click', () => {
-          window.location.replace('/firebase');
-        });
-              window.location = '/list';
 
-*/
-      window.location = '/#firebase';
+      if (!user.emailVerified) {
 
-      const listRegisterBtn = document.querySelector('.listRegisterBtn');
+      } else {
+        window.location ="#/firebase";
+        const listRegisterBtn = document.querySelector('.listRegisterBtn');
 
-      listRegisterBtn.innerHTML = '<a class="btn" id="registerBtn" href="/firebase" data-navigo title="Register / Log In">Register/Log In</a>';
+        listRegisterBtn.innerHTML = '<a class="btn" id="registerBtn" href="/firebase" data-navigo title="Register / Log In">Register/Log In</a>';
+      }
     }
   });
-
   const ul = document.getElementById('posts');
   const downFavo = () => {
     const rootRef = database.ref();
@@ -108,25 +123,39 @@ export default () => {
         console.log(data);
 
         const adres = data.Adres;
-        const prijs = data.Toilet;
-        const id = data.Douche;
-        const categorie = data.Type;
-        console.log(prijs);
+        const Toilet = data.Toilet;
+        const Douche = data.Douche;
+        const image = data.image;
+        const madeName = data.name;
+        const key = childSnapshot.key;
+        const time = data.time;
+        const type = data.Type;
 
-        const getRandomNum = () => Math.floor(Math.random() * 206);
 
         const main = createNode('div');
-        main.innerHTML = `<div class="product">
-            <p class="product-title">${categorie}</p>
-            <div id="imageGen"></div>
-            <img src="https://source.unsplash.com/collection/494266/${getRandomNum()}" alt="image" />
-            <div class="product-text">
-            <p> id: ${id}
-             <p>Het gegeven adres: ${adres} ${prijs} <br> De prijs: </p>
-             <button class="gradient-button gradient-button-1 details" id="detailsList">View Product</button>
-            </div>
-           </div>
-           
+        main.innerHTML = `<div class="product" id="${key}">
+        <img src="${image}" alt="image" />
+        <div class="product-text">
+        <div class="profileInfo">
+        <img alt='Profile Photo' class='avatar-photo' height='28' src='https://4.bp.blogspot.com/-H232JumEqSc/WFKY-6H-zdI/AAAAAAAAAEw/DcQaHyrxHi863t8YK4UWjYTBZ72lI0cNACLcB/s1600/profile%2Bpicture.png' width='28'>
+        <div class="posted-name">${madeName} <br> <span> ${time}</span></div>
+        <div class="Type">${type} <br> 
+        </div>
+        </div>
+
+        <p>  ${Toilet}</p>
+
+         <p>Het gegeven adres: ${adres} ${Douche} <br> De prijs: </p>
+         <hr>
+         <div class='icons'>
+         <div data-href="https://developers.facebook.com/docs/plugins/" class="fb-share-button"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" ><i class="fa fa-share-alt iconColor"></i></a></div>
+         <a href="/#chat" id="chatUser"><i class="fa fa-comment-o iconColor"></i></a>
+
+         </div/
+       
+
+        </div>
+       </div>
            `;
         append(ul, main);
       });

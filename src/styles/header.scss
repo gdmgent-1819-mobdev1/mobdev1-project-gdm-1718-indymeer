@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:400,700');
+@import "./var.scss";
 
 *, *:before, *:after {
   -webkit-box-sizing: inherit;
@@ -26,16 +27,17 @@ html {
 }
 
 body {
-  font-family:  'Open sans', sans-serif;
-  ;
+  font-family: $gibson;
+  font-size: $bodyText;
+  
   margin: 0;
-  font-weight: 300;
+  font-weight: $gibsonLight;
   
 
-  color: #0a0a0b;
+  color: $bodyColor;
 }
 p {
-  font-size: 16px;
+  
   line-height: 1.5;
 }
 .home_container{
@@ -106,20 +108,15 @@ header nav li:last-child{
 }
 
 a.btn {
-  color: #d73851;
+  color: #fff;
   padding: 10px;
-  border: 1px solid rgba(255,255,255,0.5);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
   transition: all 0.2s;
+  background-color: #d73851;
+  border-radius: 10px;
 }
-
-a.btn:hover {
-  background: #d73851;
-  border: 1px solid #d73851;
-  color: #fff;
-}
-
 .cover  {
   height: 100vh;
   width: 100%;
@@ -218,6 +215,7 @@ input[type="search"] {
 
   h1 {
     font-size: 2rem;
+    line-height: 1.2;
   }
 
   .cover {

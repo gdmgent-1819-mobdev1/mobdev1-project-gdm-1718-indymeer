@@ -8,7 +8,7 @@
 	<div class="form-structor">
 	<div class="signup">
 		<h2 class="form-title" id="signup"><span>or</span>Sign up</h2>
-				<div class="avatarContainer">
+				<!--<div class="avatarContainer">
 	
     <div class="avatar-upload">
         <div class="avatar-edit">
@@ -23,13 +23,24 @@
         </div>
         
     </div>
+		</div>-->
+		<div id="UserOption">
+		<input type="checkbox" id="checkbox" name="admin" value="Admin"> <span class="boxContent"> Ik ben een verkoper</span>  <br>
+		  <select name="campuslist" id="CampusList" autocomplete="off">
+        <option value="" disabled selected hidden>Campus</option>
+        <option value="1">Artevelde Mariakerke</option>
+        <option value="2 ">Hogeschool gent</option>
+				<option value="3">Odisee Gent</option>
+
+      </select>
 		</div>
-					<input type="checkbox" id="checkbox" name="admin" value="Admin"> Ik ben een verkoper <br>
-
 		<div class="form-holder">
-
+			
 			<input type="text" class="input"  id="userName" placeholder="Name" />
 			<input type="email" class="input" id="registMail" placeholder="Email" />
+			<input type="text" class="input"  id="userAdres" placeholder="Adres" />
+			<input type="number" class="input"  id="userTelefoon" placeholder="Telefoonnummer" />
+
 			<input type="password" class="input" id="registPass" placeholder="Password" />
 		</div>
 		<button class="submit-btn" id="submit-Sign">Sign up</button>

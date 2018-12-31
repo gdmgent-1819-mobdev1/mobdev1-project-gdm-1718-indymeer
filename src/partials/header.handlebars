@@ -1,26 +1,35 @@
 
-  <header>
-    <h2><a href="#"><i class="ion-plane"></i> KotBnb</a></h2>
-    <nav>
-      <ul class="navUl">
-        <li>
-          <a href="/" data-navigo title="Hotels">Home</a>
-        </li>
-         <li id="rent">
-          <a href="/rent"  data-navigo title="Hotels">Wordt verhuurder</a>
-        </li>
-        <li>
-          <a href="/mapbox" data-navigo title="About">Map</a>
-        </li>
-        <li>
-          <a href="/chat" data-navigo title="Chat">chat</a>
-        </li>
 
-        <li class="listRegisterBtn">
-          <a class="btn" id="registerBtn" href="/firebase" data-navigo title="Register / Log In">Register/Log In</a>
+  <div class="wrapper">
+  <div class="sidebar">
+    <div class="userDetails">
+      <h2 class="userName">
+        <h2>
+          <p class="userEmail"></p>
+    </div>
+    <div class="menu">
+      <ul>
+       <li class="contacts bold">
+                    <a href="/" data-navigo title="Hotels">Home</a>
         </li>
-         
+         <li class="settings bold"> 
+           <a href="/mapbox" data-navigo title="About">Map</a>
+        </li>
+         <li class="eraseTags light">
+          <a href="/tinder" data-navigo title="tinder">tinder</a>
+        </li>
+      <li class="listRegisterBtn">
+          <a  href="/firebase-example" data-navigo class="btn" id="registerBtn" title="Register / Log In">Register/Log In</a>
+        </li>
       </ul>
-    
-    </nav>
-  </header>
+    </div>
+  </div>
+  <div class="content no-animation displayContent" data-pos="0">
+    <div id="poppedOut">
+      <div id="openMenu" class="openMenu">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div id="searchBar">KotBnb</div>
+    </div>

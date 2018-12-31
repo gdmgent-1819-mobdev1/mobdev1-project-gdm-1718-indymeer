@@ -1,0 +1,37 @@
+@import url("https://use.typekit.net/zik3pzb.css");
+
+/*** VARIABLES ***/
+$black: #000000;
+$white: #FFFFFF;
+$bodyColor: #78849E;
+$darkBody: #454F63;
+$red: #EB415D;
+
+/* Experiement here and change the hex codes for the variables $accentPrimary and $accentSecondary, and see changes throughtout the page where the variables are used in the CSS */
+$accentPrimary: #05a6df;
+$accentSecondary: #008AB3;
+
+$caution: #EEAA10;
+$success: #22AA55;
+$error: #f65327;
+$gradient: linear-gradient(to bottom, #ffffff, #fdfdfe, #fbfbfc, #f9f9fb, #f7f7fa);
+
+/*Fonts*/
+
+$gibson: canada-type-gibson,sans-serif;
+$gibsonLight: 300;
+$gibsonReg : 400;
+$gibsonBold : 600;
+
+
+/* Font-size */
+
+$bodyText: 14px;
+$bodyTitle: 16px;
+$title: 40px;
+$date: 11px;
+
+
+/* shadow */
+
+$Shadow: 0px 4px 16px 0px rgba(69, 91, 99, 0.18);

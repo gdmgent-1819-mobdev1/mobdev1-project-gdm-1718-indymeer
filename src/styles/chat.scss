@@ -1,20 +1,4 @@
-/* ----------------------------------------------------------------------------------------------------
-
-Super Form Reset
-
-A couple of things to watch out for:
-
-- IE8: If a text input doesn't have padding on all sides or none the text won't be centered.
-- The default border sizes on text inputs in all UAs seem to be slightly different. You're better off using custom borders.
-- You NEED to set the font-size and family on all form elements
-- Search inputs need to have their appearance reset and the box-sizing set to content-box to match other UAs
-- You can style the upload button in webkit using ::-webkit-file-upload-button
-- ::-webkit-file-upload-button selectors can't be used in the same selector as normal ones. FF and IE freak out.
-- IE: You don't need to fake inline-block with labels and form controls in IE. They function as inline-block.
-- By turning off ::-webkit-search-decoration, it removes the extra whitespace on the left on search inputs
-
-----------------------------------------------------------------------------------------------------*/
-
+@import './var.scss';
 
 
 /* Remove the stupid outer glow in Webkit .*/
@@ -126,7 +110,6 @@ select
 
 #chatBody {
   display: flex;
-  justify-content: center;
   align-items: center;
   margin: 0;
   height: 100vh;
@@ -137,17 +120,29 @@ select
 .chat-container {
   border-radius: 5px;
   position: relative;
-  height: 75%;
-  width: 50%;
-  overflow: hidden;
+  /*height: 100%;*/
+  width: 100%;
+  /* overflow: hidden; */
+  float: left;
 }
 
 .chat-box {
   position: absolute;
-  bottom: 0;
-  width: 100%;
+  bottom: 76px;
+  width: 90%;
   background-color: #fff;
-  height: 10%;
+  height: 7%;
+  margin: auto;
+  right: 0;
+  left: 0;
+  display: inline-flex;
+  border-radius: 0px;
+  overflow: hidden;
+  border-radius: 9px;
+  box-shadow: $Shadow;
+}
+#chatTitle{
+  width: 90%;
 }
 
 #reviewForm {
@@ -162,26 +157,30 @@ select
   display: flex;
   flex-direction: column;
   padding: 16px;
-  height: 90%;
+  height: 100%;
   overflow-y: scroll;
   box-sizing: border-box;
   list-style: none;
   margin-top: 0;
-  background-color: #e4ced0;
+  background-image: $gradient;
 }
 
 .chat-container li {
-  border-radius: 5px;
-  background-color: #fff;
+  border-radius: 7px;
+  background-color: #e3e3e3;
   list-style: none;
   width: fit-content;
   padding: 8px;
   margin-bottom: 8px;
+  color: $darkBody;
+  min-width: 46px;
+  display: table;
 }
 
 .chat-container li.other {
-  background-color: #e3e3e3;
+  background-color: $red;
   align-self: flex-end;
+  color: #fff;
 }
 
 .chat-container li:last-of-type {
@@ -199,6 +198,7 @@ select
   outline: none;
   padding-top: 8px;
   padding-left: 8px;
+  line-height: 2.5;
 }
 
 .chat-container button {
@@ -207,8 +207,12 @@ select
   right: 0;
   width: 10%;
   height: 100%;
-  background-color: #bcd5f3;
+  /* background-color: #bcd5f3; */
   outline: none;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: $bodyColor;
 }
 
 .chat-container button:hover { 
@@ -224,3 +228,97 @@ select
   color: #fff;
   font-size: 16px;
 }
+
+$size: 3rem;
+
+.hideItem{
+  display: none;
+}
+#return{
+  font-size: 19px;
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  left: 10px;
+}
+.avatar {
+  position: relative;
+  height: $size;
+  width: $size;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  transition: 250ms;
+  &__image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 999px;
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    height: $size / 8;
+    width: $size / 8;
+    background-color: lime;
+    border: 4px solid papayawhip;
+    border-radius: 999px;
+    transition: 250ms;
+  }
+  &:hover::after {
+    transform: scale(2);
+    border: 4px solid rgba(0,0,0,0.125);
+    // border-width: 2px;
+  }
+}
+
+.message {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  &:hover {
+    background-color: rgba(0,0,0,0.025);
+  }
+  &__stuff {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__snippet {
+    margin-left: 1rem;
+    font-size: 1rem;
+  }
+  &__name {
+    font-weight: bold;
+  }
+}
+
+//
+// decoration
+// 
+#mainContainer{
+  display: flex;
+}
+
+#listbody{
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 100vh;
+  color: rgba(0, 0, 0, 0.75);
+  transform: translate(0, 2px);
+  transition: .4s ease-out;
+  position: absolute;
+  /* float: left; */
+  z-index: 3;
+  width: 100%;
+}
+
+.chatAnimation{
+  transform: translate(-100%, 2px) !important;
+  transition: .4s ease-out;
+}
+
+

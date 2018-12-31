@@ -19,12 +19,70 @@ export default () => {
   console.log(`${studentRef } ${sellerRef}`);
 
   const loading = true;
-  const posts = {};
   const title = 'Firebase calls example';
   // Return the compiled template to the router
-  update(compile(aboutTemplate)({ title, loading, posts }));
+  update(compile(aboutTemplate)({ title, loading }));
+
+// AUTH VOOR HEADER WEER TE GEVEN
+document.getElementById('openMenu').onclick = function () {
+  const element = document.querySelector('.content');
+  element.classList.remove('no-animation');
+  element.classList.toggle('shrink');
+};
+
+// WHEN USER IS ACTIVE
+
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+ 
+    const showProfile = document.querySelector('.userDetails');
+    const menu = document.querySelector('.menu');
+
+    const name = user.displayName;
+    const email = user.email;
 
 
+    showProfile.innerHTML = `
+    <h2 class="userName">${name}<h2>
+      <p class="userEmail">${email}</p>`;
+
+    menu.innerHTML = `
+    <ul>
+      <li class="contacts bold">
+                  <a href="/#/" data-navigo title="Hotels">Home</a>
+      </li>
+
+      <li class="partners bold">
+        <a href="/#/rent"  data-navigo title="Hotels">Profile</a>
+      </li>
+
+      <li class="settings bold"> 
+         <a href="/#/mapbox" data-navigo title="About">Map</a>
+      </li>
+
+      <li class="eraseDb light"> 
+        <a href="/#/chat" data-navigo title="Chat">chat</a>
+      </li>
+      <li class="eraseTags light">
+        <a href="/#/tinder" data-navigo title="tinder">tinder</a>
+      </li>
+      <li class="logOut"><a href="#" id="logout"> Log Out</a></li>      </ul>
+    `;
+
+    //rentKot();
+
+
+    //        console.log(user.displayName);
+
+    if (!user.emailVerified) {
+
+    } else {
+      const listRegisterBtn = document.querySelector('.listRegisterBtn');
+
+      listRegisterBtn.innerHTML = '<a class="btn" id="registerBtn" href="/firebase" data-navigo title="Register / Log In">Register/Log In</a>';
+    }
+  }
+});
   // CODE OM TE SWITCHEN VAN LOGIN NAAR REGISTER
 
 
@@ -64,6 +122,7 @@ export default () => {
   }
 
   // CODE VOOR IMAGE UPLOAD
+  /*
   document.getElementById('imageUpload').addEventListener('change', readURL, true);
   function readURL() {
     const file = document.getElementById('imageUpload').files[0];
@@ -75,7 +134,7 @@ export default () => {
       reader.readAsDataURL(file);
     }
   }
-
+*/
 
   const loginBtn = document.getElementById('login');
   const signupBtn = document.getElementById('signup');
@@ -94,6 +153,7 @@ export default () => {
       }
     });
   });
+ 
 
   signupBtn.addEventListener('click', (e) => {
     const parent = e.target.parentNode;
@@ -107,6 +167,9 @@ export default () => {
     });
   });
   // SIGNUP
+  document.querySelector("#checkbox").addEventListener("change", function() {
+    document.querySelector('#CampusList').classList.toggle('hide');
+});
 
   function signup(e) {
     e.preventDefault();
@@ -114,10 +177,33 @@ export default () => {
     const email = document.getElementById('registMail').value;
     const password = document.getElementById('registPass').value;
     const username = document.getElementById('userName').value;
-    const auth = firebase.auth();
+    const adres = document.getElementById('userAdres').value;
+    const tel = document.getElementById('userTelefoon').value;
+
+    const select = document.getElementById('CampusList').value;
+    const selectedCampus = document.getElementById('CampusList');
+    const campus = selectedCampus.options[selectedCampus.selectedIndex].text;
     let status = null;
 
-    if (document.getElementById('checkbox').checked) { status = 'verkoper'; } else { status = 'student'; }
+    let long = 0;
+    let lat = 0;
+
+    if (select === '1') {
+      long = 3.669072;
+      lat = 51.087393;
+    } else if (select === '2') {
+      long = 3.700460;
+      lat = 51.032020;
+    } else if (select === '3') {
+      long = 3.708860;
+      lat = 51.060800;
+    }
+
+    if (document.getElementById('checkbox').checked) 
+    { status = 'verkoper';
+   } else { 
+     status = 'student'; 
+    }
     /*
         const fileButton = document.getElementById('imageUpload');
         var file = fileButton.files[0];
@@ -125,6 +211,7 @@ export default () => {
         storageRef.put(file);
      */
    
+    const auth = firebase.auth();
 
     auth.createUserWithEmailAndPassword(email, password)
       .then(() => {
@@ -136,6 +223,11 @@ export default () => {
             username,
             email,
             status,
+            adres,
+            tel,
+            campus,
+            long,
+            lat
           });
     
         auth.currentUser.sendEmailVerification()
@@ -143,6 +235,8 @@ export default () => {
             toHome();
           });
       });
+      
+      
 
 
   

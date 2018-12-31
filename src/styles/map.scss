@@ -1,6 +1,6 @@
-
+@import './var.scss';
 .mapbody{
-    height: 600px;
+    height: 100vh;
     width: 100%;
     position: absolute;
 }
@@ -10,11 +10,49 @@
     top: 0;
     bottom: 0;
 }
-
+.mapboxgl-canvas{
+  width: 100%;
+}
 
 a.mapboxgl-ctrl-logo{
   display: none;
 }
 .mapboxgl-ctrl-attrib.mapboxgl-compact::after{
   display: none;
+}
+
+.mapboxgl-ctrl-top-right {
+  top: 0;
+  right: 0;
+  width: 100%;
+}
+
+.mapboxgl-ctrl-geocoder, .mapboxgl-ctrl-geocoder ul {
+  box-shadow:  $Shadow;
+}
+.mapboxgl-ctrl-geocoder {
+  min-width: 80%;
+}
+
+.mapboxgl-ctrl-top-right .mapboxgl-ctrl {
+  margin: 10px auto;
+   float: none; 
+  border-radius: 13px;
+}
+
+.mapboxgl-ctrl-geocoder input[type='text']{
+  height: 50px;
+}
+
+.mapboxgl-ctrl-geocoder .geocoder-icon-search {
+  position: absolute;
+  top: 16px;
+  left: 10px;
+}
+
+.mapboxgl-ctrl-group:not(:empty) {
+    box-shadow: $Shadow;
+    float: right;
+    margin-right: 8px;
+    margin-top: 66%;
 }

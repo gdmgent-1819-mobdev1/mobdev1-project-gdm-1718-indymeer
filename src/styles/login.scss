@@ -1,3 +1,4 @@
+@import './var.scss';
 $primary-color:#FFF;
 $Chambray:#3B5999;
 $Mine-Shaft:#232323;
@@ -112,26 +113,119 @@ $medium-screen:750px;
 
 // OTHER STYLE
 
+.hide{
+	display: none !important;
+}
+
+#CampusList{
+	display: block;
+}
 
 
+#CampusList{
+
+    background: #ffffff;
+    overflow: hidden;
+    border: 1px solid #cbcbcb;
+    border-radius: 3px;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.1), inset 0 0 10px rgba(0, 0, 0, 0.07);
+
+
+    &:focus,
+    &:hover {
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+    &:after {
+        content: '▾';
+        position: absolute;
+        top: 0;
+        right: 12px;
+        z-index: 1;
+        color: #bbbbbb;
+        line-height: 40px;
+        font-size: 14px;
+
+        .ie & {
+            display: none;
+        }
+    }
+}
+
+select {
+    position: relative;
+    background: transparent;
+    background-image: none;
+    display: block;
+    width: 100%;
+    outline: none;
+    color: #888888;
+    cursor: pointer;
+    z-index: 2;
+    border: none;
+    padding: 10px 10px 10px 5px;
+    // This is so hacky.. (for Firefox)
+    // Removes the default select arrow.
+    text-overflow: '';
+    text-indent: 5px;
+    // End of brutal hack
+
+
+    &[multiple=multiple] {
+        height: auto;
+        border: 1px solid #cbcbcb;
+        border-radius: 3px;
+        box-shadow: 0 0 1px rgba(0, 0, 0, 0.1), inset 0 0 10px rgba(0, 0, 0, 0.07);
+
+
+        &:hover {
+            border-color: #cccccc;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+    }
+
+    option[disabled] {
+        color: #eeeeee;
+        text-shadow: none;
+        border: none;
+    }
+}
+
+select:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #888888;
+}
+
+select::-ms-expand {
+    display: none;
+}
 
 .form-structor {
-	background-color: #222;
-	border-radius: 15px;
-	height: 550px;
-	margin-top:7%;
-	width: 350px;
-	position: relative;
-	overflow: hidden;
+    background-color: #222;
+    /* border-radius: 15px; */
+    height: 100%;
+    /* margin-top: 7%; */
+    width: 100%;
+    position: relative;
+    overflow: hidden;
 	
 	&::after {
 		content: '';
 		opacity: .8;
 		position: absolute;
-		top: 0;right:0;bottom:0;left:0;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
 		background-repeat: no-repeat;
 		background-size: 500px;
 		background-image: url('../img/background_login.jpg');
+		background-size: cover;
+		background-position: 45% bottom;
+	}
+
+	.boxContent{
+		color: #FFF;
 	}
 	
 	.signup {
@@ -151,7 +245,8 @@ $medium-screen:750px;
 		}
 		
 		&.slide-up .form-holder,
-		&.slide-up .submit-btn {
+		&.slide-up .submit-btn,
+		&.slide-up #UserOption {
 			opacity: 0;
 			visibility: hidden;
 		}
@@ -185,7 +280,7 @@ $medium-screen:750px;
 			border-radius: 15px;
 			background-color: #fff;
 			overflow: hidden;
-			margin-top: 50px;
+			margin-top: 9px;
 			opacity: 1;
 			visibility: visible;
 			-webkit-transition: all .3s ease;
@@ -209,6 +304,7 @@ $medium-screen:750px;
 					color: rgba(0,0,0,0.4);
 				}
 			}
+			
 		}
 		
 		.submit-btn {
@@ -309,10 +405,11 @@ $medium-screen:750px;
 						color: rgba(0,0,0,0.4);
 					}
 				}
+				
 			}
 
 			.submit-btn {
-				background-color: #6B92A4;
+				background-color: $red;
 				color: rgba(256,256,256,0.7);
 				border:0;
 				border-radius: 15px;
@@ -335,7 +432,7 @@ $medium-screen:750px;
 		}
 		
 		&.slide-up {
-			top: 90%;
+			top: 85%;
 			-webkit-transition: all .3s ease;
 		}
 		

@@ -1,18 +1,26 @@
 {{> header }}
-<div id="chatBody">
+<div id="mainContainer">
+<div id="chatBody" class="no-animation">
+<div id="listbody">
+
+</div>
+</div>
+
+
 <div class="chat-container">
   <ul class="chat-feed">
   </ul>
   <div class="chat-box">
     <div id="chatTitle">
     <form id='reviewForm'>
-      <textarea placeholder="Write your message..." id='message'></textarea>
+      <textarea placeholder="Say something..." id='message'></textarea>
       <button type='submit'>
-        <i class="fa fa-paper-plane" aria-hidden="true"></i>
+        <i class="fa fa-plus"></i>
       </button>
     </form>
   </div>
   </div>
 </div>
 </div>
+
 {{> footer }}
