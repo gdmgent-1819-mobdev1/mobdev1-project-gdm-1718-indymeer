@@ -127,8 +127,8 @@ select
 }
 
 .chat-box {
-  position: absolute;
-  bottom: 76px;
+  position: fixed;
+  bottom: 17px;
   width: 90%;
   background-color: #fff;
   height: 7%;
@@ -157,7 +157,7 @@ select
   display: flex;
   flex-direction: column;
   padding: 16px;
-  height: 100%;
+  height: 83%;
   overflow-y: scroll;
   box-sizing: border-box;
   list-style: none;

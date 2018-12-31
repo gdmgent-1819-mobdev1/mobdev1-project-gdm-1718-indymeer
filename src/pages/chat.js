@@ -29,7 +29,10 @@ export default () => {
 
   // HOVER OPTIONS OVER PROFILE PIC
 
+
   const chat = (snapkey) => {
+
+    // snapkey = unique roomkey
     console.log(snapkey);
     const reciever = sessionStorage.getItem('variableName');
     const db = firebase.database();
@@ -37,60 +40,62 @@ export default () => {
     const textBox = document.querySelector('#message');
     const chats = document.querySelector('.chat-feed');
     const sessionId = firebase.auth().currentUser.uid;
-    const keyRef = firebase.database().ref('chats/');
+    const keyRef = firebase.database().ref(`chats/${snapkey}/msg`);
+    chats.innerHTML = '';
 
 
     keyRef.once('value', (snapshot) => {
-      snapshot.forEach((childSnapshot) => {
-        childSnapshot.forEach((snapshot2) => {
-          const data = snapshot2.val();
-          console.log(data);
+      chatForm.addEventListener('submit', handleSubmit);
 
-          if (firebase.auth().currentUser.uid === data.verzender || firebase.auth().currentUser.uid === data.ontvanger) {
-            chatForm.addEventListener('submit', handleSubmit);
+      function handleSubmit(e) {
+        e.preventDefault();
 
-            function handleSubmit(e) {
-              e.preventDefault();
-
-              if (!textBox.value) {
-                return;
-              }
+        if (!textBox.value) {
+          return;
+        }
 
 
-              msgRef.push({
-                userId: sessionId,
-                message: textBox.value,
-              });
-
-              textBox.value = '';
-            }
-            const msgRef = db.ref(`chats/${snapkey}/msg`);
-            msgRef.on('child_added', handleChildAdded);
-
-            function handleChildAdded(data) {
-              const messageData = data.val();
-              const li = document.createElement('li');
-
-              li.innerHTML = messageData.message;
-
-              if (messageData.userId == sessionId) {
-                li.classList.add('other');
-              }
-
-              chats.appendChild(li);
-              chats.scrollTop = chats.scrollHeight;
-            }
-
-            textBox.addEventListener('keydown', handleKeyDown);
-
-            function handleKeyDown(e) {
-              if (e.which === 13) {
-                handleSubmit(e);
-              }
-            }
-          }
+        keyRef.push({
+          userId: sessionId,
+          message: textBox.value,
         });
-      });
+
+        textBox.value = '';
+      }
+
+        const data = snapshot.val();
+        console.log(data);
+
+        // push value of invoering naar firebase
+       
+        // als er een child key is bijgekomen
+
+        keyRef.on('child_added', handleChildAdded);
+        
+        // maak de html content
+        function handleChildAdded(data) {
+          const messageData = data.val();
+          const li = document.createElement('li');
+
+          li.innerHTML = messageData.message;
+
+          if (messageData.userId == sessionId) {
+            li.classList.add('other');
+          }
+
+          chats.appendChild(li);
+          chats.scrollTop = chats.scrollHeight;
+        }
+
+        // als er op enter gedrukt wordt, zorg voor een submit
+        textBox.addEventListener('keydown', handleKeyDown);
+
+        function handleKeyDown(e) {
+          if (e.which === 13) {
+            handleSubmit(e);
+          }
+        }
+      
     });
   };
 
@@ -151,7 +156,7 @@ export default () => {
               for (let i = 0; i < buttons.length; i++) {
                 buttons[i].addEventListener('click', slide);
               }
-              }
+            }
           }
         });
       });
