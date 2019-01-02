@@ -25,7 +25,7 @@ export default () => {
     return parent.appendChild(el);
   }
 
-  // HOVER OPTIONS OVER PROFILE PIC
+  // NAV ANIMATIONS
   document.getElementById('openMenu').onclick = function () {
     const element = document.querySelector('.content');
     element.classList.remove('no-animation');
@@ -34,13 +34,6 @@ export default () => {
 
   // WHEN USER IS ACTIVE
 
-  /*
-  function rentKot() {
-    document.getElementById('rentPage').innerHTML = `
-
-  `;
-  }
-  */
 
   // function to check when user is loggedin
 
@@ -52,7 +45,14 @@ export default () => {
       const ref = firebase.database().ref(`accounts/${user_id}`);
       ref.once('value', (snapshot) => {
         if (snapshot.val().status === 'verkoper') {
+          const school = document.querySelector('.school');
+          const verkoper = snapshot.val().status;
+          school.innerHTML = verkoper;
+
+
         } else {
+         
+
         }
       });
 
@@ -61,12 +61,15 @@ export default () => {
       const userProfile = document.querySelector('.nameUser');
       const school = document.querySelector('.school');
 
+
       const name = user.displayName;
       const email = user.email;
-      const opleiding = user.school;
+
+      const opleiding = user.campus;
+      school.innerHTML = opleiding;
+
 
       userProfile.innerHTML = name;
-      school.innerHTML = opleiding;
 
       showProfile.innerHTML = `
       <h2 class="userName">${name}<h2>
@@ -95,7 +98,6 @@ export default () => {
         <li class="logOut"><a href="#" id="logout"> Log Out</a></li>      </ul>
       `;
 
-      //rentKot();
       downFavo();
 
 
@@ -111,16 +113,32 @@ export default () => {
       }
     }
   });
+
+
+  // FUNCTION TO DELETE POST BY GETTING THE KEY OF THE ID
+
+  const DeletePost = (snapkey) => {
+    const user_id = firebase.auth().currentUser.uid;
+
+    const ref = firebase.database().ref(`favorites/${user_id}`);
+    ref.child(snapkey).remove();
+    location.reload();
+
+    alert('Not longer a Favorite');
+  };
+
+  // GETTING THE FAVO ITEMS AND CREATE THEM
+
   const ul = document.getElementById('posts');
   const downFavo = () => {
-    const rootRef = database.ref();
     const user_id = firebase.auth().currentUser.uid;
+
+    const rootRef = database.ref();
 
     const urlRef = rootRef.child(`favorites/${user_id}`);
     urlRef.once('value', (snapshot) => {
       snapshot.forEach((childSnapshot) => {
         const data = childSnapshot.val();
-        console.log(data);
 
         const adres = data.Adres;
         const Toilet = data.Toilet;
@@ -130,34 +148,78 @@ export default () => {
         const key = childSnapshot.key;
         const time = data.time;
         const type = data.Type;
+        const Prijs = data.Prijs;
+        const opp = data.Opp;
+
 
 
         const main = createNode('div');
+        
         main.innerHTML = `<div class="product" id="${key}">
         <img src="${image}" alt="image" />
         <div class="product-text">
         <div class="profileInfo">
         <img alt='Profile Photo' class='avatar-photo' height='28' src='https://4.bp.blogspot.com/-H232JumEqSc/WFKY-6H-zdI/AAAAAAAAAEw/DcQaHyrxHi863t8YK4UWjYTBZ72lI0cNACLcB/s1600/profile%2Bpicture.png' width='28'>
         <div class="posted-name">${madeName} <br> <span> ${time}</span></div>
-        <div class="Type">${type} <br> 
+        <div class="Type">${type} <br>        
         </div>
         </div>
 
-        <p>  ${Toilet}</p>
 
-         <p>Het gegeven adres: ${adres} ${Douche} <br> De prijs: </p>
+         <p>Het gegeven adres: ${adres}<br> De prijs: ${Prijs} </p>
+          <p> De opgegeven oppervlakte: ${opp} m² </p>  
+       
          <hr>
          <div class='icons'>
          <div data-href="https://developers.facebook.com/docs/plugins/" class="fb-share-button"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" ><i class="fa fa-share-alt iconColor"></i></a></div>
-         <a href="/#chat" id="chatUser"><i class="fa fa-comment-o iconColor"></i></a>
+         <button id="chatUser"><i class="fa fa-comment-o iconColor"></i></button>
 
-         </div/
+         <button class="heartBtn"><i class="fa fa-heart red" id="${key}"></i></button>
+         </div>
        
 
         </div>
        </div>
            `;
         append(ul, main);
+        const user_name = firebase.auth().currentUser.displayName;
+        const toChat = () => {
+          sessionStorage.setItem('variableName', data.adminId);
+          const sessionKey = data.adminId + '_' + user_id;
+          const myRef = firebase.database().ref(`chats/${sessionKey}`);
+          const key = myRef.key;
+
+          const info = {
+            id: key,
+            verzender: user_id,
+            verzenderName: user_name,
+            ontvanger: data.adminId,
+            ontvangerName: data.name,
+
+          };
+          myRef.child('members').set(info);
+          window.location.href = '#/chat';
+      }
+      
+      // FOR LOOPS TO LOOP OVER ALL BUTTONS
+
+        if (document.getElementById('chatUser') !== null) {
+          const buttons = document.querySelectorAll('#chatUser');
+          for (let i = 0; i < buttons.length; i++) {
+            buttons[i].addEventListener('click', toChat);
+          }
+        }
+
+        if (document.querySelector('.heartBtn') !== null) {
+          const buttons = document.querySelectorAll('.heartBtn');
+          for (let i = 0; i < buttons.length; i++) {
+          buttons[i].onclick = function (e) {
+            const snapkey = e.target.getAttribute('id');
+
+            DeletePost(snapkey);
+          };
+        }
+        };
       });
     });
   };

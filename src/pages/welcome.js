@@ -22,7 +22,6 @@ export default () => {
     if (user) {
         window.location.replace('/#home');
 
-    } else {
-    }
+    } 
   });
 };

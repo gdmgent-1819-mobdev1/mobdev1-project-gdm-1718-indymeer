@@ -57,7 +57,6 @@ export default () => {
 
       const userLoc = [];
 
-      console.log(user_id);
       // eslint-disable-next-line camelcase
       const ref = firebase.database().ref(`accounts/${user_id}`);
       ref.once('value', (snapshot) => {
@@ -72,14 +71,14 @@ export default () => {
         localStorage.setItem('Locatie', JSON.stringify(userLoc));
 
 
-        console.log(snapshot.val());
 
         if (snapshot.val().status === 'verkoper') {
-          console.log('test');
+          // DO NOTHING
         } else {
-          console.log('beter proberen');
           document.getElementById('plus').outerHTML = "";
           const store = JSON.parse(localStorage.getItem('Locatie'));
+
+          // CONVERT DITSTANCE BETWEEN USER AND CAMPUS AND PUSH IT TO THE REF
 
           const degreesToRadians = (degrees) => {
             return degrees * (Math.PI / 180);
@@ -205,8 +204,6 @@ export default () => {
   let imgUrl;
 
   const imageUpload = () => {
-    console.log('test');
-
 
     if (firebase) {
       const fileUpload = document.getElementById('kotFoto');
@@ -236,6 +233,7 @@ export default () => {
     }
   };
 
+  // PUSH THE CREATED ITEMS TO THE MAPBOX DATABASE FOR MARKERS
 
   mapboxgl.accessToken = config.mapBoxToken;
 
@@ -259,6 +257,10 @@ export default () => {
   inputAdres.addEventListener('blur', convert);
 
 
+// CHECK ADRESS FUNTION
+
+  // TRIED CREATING CHECK FUNCTION TO CHECK IF THE ADRESS IS IN GHENT
+  // ALTERNATIVE SOLUTIONS BUT NO TIME: CHECK ON POSTCODE / LIST OF ALL STREETS OF GHENT AND == IF ADRESS IS EQUAL
   /*
   const checkInside = () => {
     /* const gentLink = 'https://datatank.stad.gent/4/grondgebied/wijken.geojson';
@@ -297,13 +299,15 @@ export default () => {
     console.log(cluster);
   }; checkInside();*/
   // eslint-disable-next-line no-unused-vars
+
+  // EDIT AND REMOVE FUNCTIONS
+
   let noImgUrl;
   let image;
 
   const DeletePost = (snapkey) => {
     const ref = firebase.database().ref('content/');
     ref.child(snapkey).remove();
-    console.log(snapkey);
     window.location.replace('/#');
 
     alert('Deleted i see - Yoda');
@@ -336,7 +340,6 @@ export default () => {
     const ref = firebase.database().ref(`content/${snapkey}`);
     ref.once('value', (snapshot) => {
       const data = snapshot.val();
-      console.log(data);
       noImgUrl = data.image;
       if (imgUrl === undefined) {
         image = noImgUrl;
@@ -442,13 +445,10 @@ export default () => {
 
   const detailsPopup = (e) => {
     detailModel.style.display = 'block';
-    console.log(e.target.getAttribute('id'));
     const uniqueId = e.target.getAttribute('id');
     const ref = firebase.database().ref(`content/${uniqueId}`);
     ref.once('value', (snapshot) => {
-      console.log(snapshot.val());
       const det = snapshot.val();
-      console.log(det.image);
 
 
       document.getElementById('detImg').src = det.image;
@@ -516,7 +516,6 @@ export default () => {
     kotRef.once('value', (snapshot) => {
       snapshot.forEach((childSnapshot) => {
         const data = childSnapshot.val();
-        console.log(data);
         const specialKey = childSnapshot.key;
         const adres = data.Adres;
         const type = data.Type;
@@ -540,7 +539,6 @@ export default () => {
         // eslint-disable-next-line camelcase
         let optionButton = '';
         if (childSnapshot.val().adminId === user_id) {
-          console.log('eureka');
           optionButton = ` <div class="post-options-holder">
               <div id= "" class="edit" >
               <i class="fa fa-pencil" id="${key}"></i>
@@ -552,7 +550,7 @@ export default () => {
            
             </div><!--End Post Options Holder -->`;
         } else {
-          console.log('beter proberen');
+          // DO NOTHING
         }
 
         const main = createNode('div');
@@ -566,7 +564,6 @@ export default () => {
               </div>
               </div>
 
-              <p>  ${Toilet}</p>
 
                <p>Het gegeven adres: ${adres}<br> De prijs: ${Prijs} </p>
                 <p> De opgegeven oppervlakte: ${opp} m² </p>  
@@ -588,12 +585,22 @@ export default () => {
         append(ul, main);
 
         
+        // IF NOT LOGGED IN, REMOVE BUTTONS
         firebase.auth().onAuthStateChanged((user) => {
           if (user) {
 
           }else{
-            document.querySelector('#chatUser').style.display = "none";
-            document.querySelector('.heartBtn').style.display = "none";
+            const buttons = document.querySelectorAll('#chatUser');
+            for (let i = 0; i < buttons.length; i++) {
+              buttons[i].style.display = "none";
+            }
+            const chat = document.querySelectorAll('.heartBtn');
+            for (let i = 0; i < buttons.length; i++) {
+              chat[i].style.display = "none";
+            }
+           
+            // document.querySelectorAll('#chatUser').style.display = "none";
+            //document.querySelectorAll('.heartBtn').style.display = "none";
 
           }
         });
@@ -602,7 +609,6 @@ export default () => {
           if (childSnapshot.val().adminId === user_id) {
             document.querySelector('.delete').onclick = function (e) {
               const snapkey = e.target.getAttribute('id');
-              console.log(snapkey);
               DeletePost(snapkey);
             };
             document.querySelector('.edit').onclick = function (e) {
@@ -613,7 +619,6 @@ export default () => {
           }
         }; tools();
         const toChat = () => {
-          console.log('triggerd')
           sessionStorage.setItem('variableName', data.adminId);
           const sessionKey = data.adminId + '_' + user_id;
           const myRef = firebase.database().ref(`chats/${sessionKey}`);
@@ -632,9 +637,7 @@ export default () => {
       }
 
         if (document.getElementById('chatUser') !== null) {
-          console.log('gevonden');
           const buttons = document.querySelectorAll('#chatUser');
-          console.log(buttons);
           for (let i = 0; i < buttons.length; i++) {
             buttons[i].addEventListener('click', toChat);
           }
@@ -642,7 +645,6 @@ export default () => {
      
         if (document.querySelector('#favorite') !== null) {
           document.getElementById('favorite').addEventListener('click', () => {
-            console.log('button clicked');
             const elem = document.querySelector('#favorite');
             elem.classList.remove('fa-heart-o');
             elem.classList.add('fa-heart', 'red');
@@ -662,18 +664,21 @@ export default () => {
             const admin = data.adminId;
             const Comment = data.Comment;
             const locatie =data.Adres;
+            const Prijs = data.Prijs;
+            const Waarborg = data.Waarborg;
             const ref = firebase.database().ref(`favorites/${user_id}`);
             ref.once('value', (snapshot) => {
         
-              console.log(snapshot.val())
               if (snapshot.val() !== specialKey) {
         
         
                 
-                firebase.database().ref(`favorites/${user_id}/${specialKey}`).set({
+                  firebase.database().ref(`favorites/${user_id}/${specialKey}`).set({
                   key: specialKey,
                   adminId: admin,
                   Type: kotType,
+                  Prijs,
+                  Waarborg,
                   Opp: oppervlakte,
                   Verdieping: verdieping,
                   Personen: personen,
@@ -694,9 +699,7 @@ export default () => {
           });
                   
         if (document.getElementsByClassName('details') !== null) {
-          console.log('gevonden');
           const buttons = document.querySelectorAll('.details');
-          console.log(buttons);
           for (let i = 0; i < buttons.length; i++) {
             buttons[i].addEventListener('click', detailsPopup);
           }
@@ -769,7 +772,6 @@ export default () => {
         //   document.getElementById('favorite').addEventListener('click', favorite);
 
         if (event.target.classList.contains('more-btn')) {
-          console.log('morebutton');
         }
       }
     }

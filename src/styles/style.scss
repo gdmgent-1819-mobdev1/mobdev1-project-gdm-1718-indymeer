@@ -73,7 +73,7 @@
 .product hr{
   opacity: 0.1;
 }
-.product .iconColor{
+.product .iconColor, .profileContainer .product .iconColor{
   color: $bodyColor;
   font-size: $bodyTitle;
 }
@@ -285,7 +285,15 @@
 //filtershit
 
 #filter-bar{
-  width: 100%
+  width: 100%;
+  margin: 0 auto;
+  /* box-shadow: 5px 5px 6px; */
+  /* border: 1px solid; */
+  /* padding: 10px; */
+  box-shadow: $Shadow;
+  padding: 2% 9%;
+  border-radius: 10px;
+  /* text-align: center; */
 }
 #filter-bar button{
       width: 30%;

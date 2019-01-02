@@ -41,6 +41,57 @@ export default () => {
 
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
+      const user_id = firebase.auth().currentUser.uid;
+      const userLoc = [];
+
+      const ref = firebase.database().ref(`accounts/${user_id}`);
+      ref.once('value', (snapshot) => {
+        let lat = snapshot.val().lat;
+        let long = snapshot.val().long;
+        
+        const locInfo = {
+          lat,
+          long,
+        }
+        userLoc.push(locInfo);
+        localStorage.setItem('Locatie', JSON.stringify(userLoc));
+
+
+
+        if (snapshot.val().status === 'verkoper') {
+          // DO NOTHING
+        } else {
+          document.getElementById('plus').outerHTML = "";
+          const store = JSON.parse(localStorage.getItem('Locatie'));
+
+          // CALCULATE DISTANCE BETWEEN USER AND CONTENT AND SORT THE TINDER TO IT
+
+          const degreesToRadians = (degrees) => {
+            return degrees * (Math.PI / 180);
+          };
+          const kotenRef = firebase.database().ref('content');
+          kotenRef.on('value', (snapshot) => {
+            snapshot.forEach((childSnapshot) => {
+              const currentKot = firebase.database().ref('content/' + childSnapshot.key);
+              const Lat = store[0].lat;
+              const Long =  store[0].long;
+              const Long2 = childSnapshot.val().coordinates[0];
+              const Lat2 = childSnapshot.val().coordinates[1];
+              const R = 6371; // metres
+              const φ1 = degreesToRadians(Lat);
+              const φ2 = degreesToRadians(Lat2);
+              const Δφ = degreesToRadians(Lat2 - Lat);
+              const Δλ = degreesToRadians(Long2 - Long);
+              const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2)
+                  + Math.cos(φ1) * Math.cos(φ2)
+                  * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+              const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+              const result = Math.round(R * c);
+              currentKot.child('toUser').set(result);
+            });
+          });
+        }
+      });
       const showProfile = document.querySelector('.userDetails');
       const menu = document.querySelector('.menu');
 
@@ -91,15 +142,16 @@ export default () => {
   });
 
 
+  // COUNTER OF THE STORAGE, WHEN CLICKED ADD ++
   let storageCounter = 0;
   loadNew();
   const koten_array = [];
 
-
+// LOAD NEW TINDER ITEMS
   function loadNew() {
     const rootRef = database.ref();
 
-    const urlRef = rootRef.child('content/');
+    const urlRef = rootRef.child('content/').orderByChild('toUser');
     urlRef.once('value', (snapshot) => {
       snapshot.forEach((childSnapshot) => {
         const data = childSnapshot.val();
@@ -161,7 +213,7 @@ export default () => {
 
   
   
-
+// CREATE THE TINDER 
   function showProfile() {
     const koten = JSON.parse(localStorage.getItem('koten'));
 
@@ -214,8 +266,6 @@ export default () => {
     const specialKey = koten[storageCounter].key;
 
     const user_id = firebase.auth().currentUser.uid;
-    console.log(koten);
-    console.log(koten[storageCounter].key);
     const type = koten[storageCounter].Type;
     const opp = koten[storageCounter].Opp;
     const verdieping = koten[storageCounter].Verdieping;
@@ -235,7 +285,6 @@ export default () => {
 
     const ref = firebase.database().ref(`favorites/${user_id}`);
     ref.once('value', (snapshot) => {
-      console.log(snapshot.val());
       if (snapshot.val() !== specialKey) {
         firebase.database().ref(`favorites/${user_id}/${specialKey}`).set({
           key: specialKey,

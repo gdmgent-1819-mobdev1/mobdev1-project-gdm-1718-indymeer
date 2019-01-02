@@ -150,31 +150,6 @@ export default () => {
                 .setHTML(`<img src="${kot.img}" width="250px"></img><p class='text-bold'>${kot.type}</p><p>${kot.name}</p>`))
               .addTo(map);
           });
-
-        /*  for (const itemIndex in koten) {
-            featureCollection.push([{ 'type': 'Feature', 'geometry': { 'type': 'Point', 'coordinates': [koten[itemIndex]] } }]);
-          }
-
-          map.on('load', () => {
-            map.loadImage('https://i.imgur.com/MK4NUzI.png', (error, image) => {
-              if (error) throw error;
-              map.addImage('custom-marker', image);
-              map.addLayer({
-                id: 'markers',
-                type: 'symbol',
-                source: {
-                  type: 'geojson',
-                  data: {
-                    type: 'FeatureCollection',
-                    features: featureCollection,
-                  },
-                },
-                layout: {
-                  'icon-image': 'custom-marker',
-                },
-              });
-            });
-          }); */
         });
       }
     });

@@ -185,6 +185,8 @@ firebase.auth().onAuthStateChanged((user) => {
     const campus = selectedCampus.options[selectedCampus.selectedIndex].text;
     let status = null;
 
+    // CAMPUS COORDINATES
+    
     let long = 0;
     let lat = 0;
 

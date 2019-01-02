@@ -59,9 +59,10 @@ export default () => {
     });
   });
 
+
+  // CHECK CHAT LIST BY THE KEY OF THE USER DEFINED IN NAMELIST
   const chat = (snapkey) => {
     // snapkey = unique roomkey
-    console.log(snapkey);
     const reciever = sessionStorage.getItem('variableName');
     const db = firebase.database();
     const chatForm = document.querySelector('#reviewForm');
@@ -92,7 +93,6 @@ export default () => {
       }
 
       const data = snapshot.val();
-      console.log(data);
 
       // push value of invoering naar firebase
 
@@ -126,20 +126,21 @@ export default () => {
     });
   };
 
+
+  // RETRIEVE CONTACT LIST 
+
   const ul = document.getElementById('listbody');
   const nameList = () => {
+    // GET THE MEMBERS IN THE SNAPKEY OF CHAT REF
     const keyRef = firebase.database().ref('chats/');
     keyRef.once('value', (snapshot) => {
-      console.log(snapshot.val());
       snapshot.forEach((childSnapshot) => {
         childSnapshot.forEach((snapshot2) => {
           const data = snapshot2.val();
-          console.log(childSnapshot.val());
           const id = data.id;
           const msg = [];
           if (firebase.auth().currentUser.uid === data.verzender) {
             const ontV = data.ontvangerName;
-            console.log(msg[0]);
 
             const main = createNode('div');
             main.innerHTML = `
@@ -190,9 +191,10 @@ export default () => {
     });
   };
 
+  // ANIMATION FOR SLIDING THE CONTACT LIST AND RENDERING THE CHATS OF THAT USER
+
   const slide = (e) => {
     const snapkey = e.currentTarget.getAttribute('id');
-    console.log(snapkey);
     chat(snapkey);
     const element = document.querySelector('#listbody');
     element.classList.toggle('chatAnimation');
@@ -210,6 +212,8 @@ export default () => {
     menuCheck();
   };
 
+
+  // ANIMATION FOR NAVIGATION 
 
   const menuCheck = () => {
     document.querySelector('#openMenu').addEventListener('click', () => {
@@ -234,15 +238,13 @@ export default () => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       const user_id = firebase.auth().currentUser.uid;
-      console.log(user_id);
       // eslint-disable-next-line camelcase
       const ref = firebase.database().ref(`accounts/${user_id}`);
       ref.once('value', (snapshot) => {
-        console.log(snapshot.val());
         if (snapshot.val().status === 'verkoper') {
-          console.log('test');
+            // DO NOTHING
         } else {
-          console.log('beter proberen');
+          // DO NOTHING
         }
       });
 
