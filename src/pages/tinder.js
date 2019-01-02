@@ -55,7 +55,7 @@ export default () => {
       menu.innerHTML = `
       <ul>
         <li class="contacts bold">
-                    <a href="/#/" data-navigo title="Hotels">Home</a>
+                    <a href="/#/home" data-navigo title="Hotels">Home</a>
         </li>
 
         <li class="partners bold">
@@ -92,13 +92,11 @@ export default () => {
 
 
   let storageCounter = 0;
+  loadNew();
   const koten_array = [];
-  const koten = JSON.parse(localStorage.getItem('koten'));
-  const specialKey = koten[storageCounter].key;
-  console.log(specialKey);
 
 
-  const loadNew = () => {
+  function loadNew() {
     const rootRef = database.ref();
 
     const urlRef = rootRef.child('content/');
@@ -148,17 +146,24 @@ export default () => {
         if (localStorage.getItem('koten') !== null) {
           koten_array.push(tinderData);
           localStorage.setItem('koten', JSON.stringify(koten_array));
+
         } else {
           koten_array.push(tinderData);
           localStorage.setItem('koten', JSON.stringify(koten_array));
-          showProfile();
-        }
+          location.reload();
+          }
       });
+      showProfile();
+
     });
-  };
+  }
 
-  const showProfile = () => {
 
+  
+  
+
+  function showProfile() {
+    const koten = JSON.parse(localStorage.getItem('koten'));
 
     if (storageCounter > koten.length - 1) {
       document.querySelector('.user__card').innerHTML = 'Op op, alles is op!';
@@ -174,7 +179,7 @@ export default () => {
       document.querySelector('.user__opp').innerHTML = koten[storageCounter].Opp;
     }
     // persons.push(new NewPerson(koten, storageCounter));
-  };
+  }
 
   function dislike() {
     ++storageCounter;
@@ -188,7 +193,7 @@ export default () => {
   function like() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-    likeFav();
+        likeFav();
       }
     });
 
@@ -200,41 +205,38 @@ export default () => {
       showProfile();
       loadNew();
     }
-
   }
-        
-  const type = koten[storageCounter].Type;
-  const opp = koten[storageCounter].Opp;
-  const verdieping = koten[storageCounter].Verdieping;
-  const personen = koten[storageCounter].Personen;
-  const toilet = koten[storageCounter].Toilet;
-  const douche = koten[storageCounter].Douche;
-  const bad = koten[storageCounter].Bad;
-  const imgUrl = koten[storageCounter].image;
-  const keuken = koten[storageCounter].Keuken;
-  const bemeubeld = koten[storageCounter].Bemeubeld;
-  const entity = koten[storageCounter].Entity;
-  const user = koten[storageCounter].name;
-  const Time = koten[storageCounter].time;
-  const admin = koten[storageCounter].adminId;
-  const Comment = koten[storageCounter].Comment;
-  const adres = koten[storageCounter].Adres;
 
 
   const likeFav = () => {
+    const koten = JSON.parse(localStorage.getItem('koten'));
+
+    const specialKey = koten[storageCounter].key;
+
     const user_id = firebase.auth().currentUser.uid;
     console.log(koten);
     console.log(koten[storageCounter].key);
-    const Adres = koten[storageCounter].Adres;
+    const type = koten[storageCounter].Type;
+    const opp = koten[storageCounter].Opp;
+    const verdieping = koten[storageCounter].Verdieping;
+    const personen = koten[storageCounter].Personen;
+    const toilet = koten[storageCounter].Toilet;
+    const douche = koten[storageCounter].Douche;
+    const bad = koten[storageCounter].Bad;
+    const imgUrl = koten[storageCounter].image;
+    const keuken = koten[storageCounter].Keuken;
+    const bemeubeld = koten[storageCounter].Bemeubeld;
+    const entity = koten[storageCounter].Entity;
+    const user = koten[storageCounter].name;
+    const Time = koten[storageCounter].time;
+    const admin = koten[storageCounter].adminId;
+    const Comment = koten[storageCounter].Comment;
+    const adres = koten[storageCounter].Adres;
 
     const ref = firebase.database().ref(`favorites/${user_id}`);
     ref.once('value', (snapshot) => {
-
-      console.log(snapshot.val())
+      console.log(snapshot.val());
       if (snapshot.val() !== specialKey) {
-
-
-        
         firebase.database().ref(`favorites/${user_id}/${specialKey}`).set({
           key: specialKey,
           adminId: admin,
@@ -256,11 +258,7 @@ export default () => {
         });
       }
     });
-
   };
-
-  loadNew();
-  showProfile();
 
 
   document.getElementById('dislike').addEventListener('click', dislike);

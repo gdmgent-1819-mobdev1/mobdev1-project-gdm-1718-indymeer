@@ -1,4 +1,5 @@
 // Pages
+import welcomeView from './pages/welcome';
 import HomeView from './pages/home';
 import AboutView from './pages/about';
 import FirebaseView from './pages/firebase-example';
@@ -8,7 +9,8 @@ import tinderView from './pages/tinder';
 
 
 export default [
-  { path: '/', view: HomeView },
+  { path: '/', view: welcomeView },
+  { path: '/home', view: HomeView },
   { path: '/rent', view: AboutView },
   { path: '/firebase-example', view: FirebaseView },
   { path: '/mapbox', view: MapboxView },

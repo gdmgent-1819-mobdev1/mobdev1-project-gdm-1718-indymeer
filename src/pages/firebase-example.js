@@ -88,7 +88,7 @@ firebase.auth().onAuthStateChanged((user) => {
 
   // Fire back to home
   function toHome() {
-    window.location.replace('/');
+    window.location.replace('/home');
   }
 
   /*  database.on('value', (snapshot) => {

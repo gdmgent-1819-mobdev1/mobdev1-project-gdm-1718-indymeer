@@ -27,11 +27,39 @@ export default () => {
   }
 
 
-  // HOVER OPTIONS OVER PROFILE PIC
+  // HOVER OPTIONS OVER PROFILE
+  // post notification on message // code from: https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API/Using_the_Notifications_API
+  const keyRef = firebase.database().ref('chats/');
+  keyRef.once('value', (snapshot) => {
+    snapshot.forEach((childSnapshot) => {
+      childSnapshot.forEach((snapshot2) => {
+        const data = snapshot2.val();
+        if (firebase.auth().currentUser.uid === data.ontvanger) {
+          if (!('Notification' in window)) {
+            alert('This browser does not support system notifications');
+          }
 
+          // Let's check whether notification permissions have already been granted
+          else if (Notification.permission === 'granted') {
+            // If it's okay let's create a notification
+            let notification = new Notification('Message received');
+          }
+
+          // Otherwise, we need to ask the user for permission
+          else if (Notification.permission !== 'denied') {
+            Notification.requestPermission((permission) => {
+              // If the user accepts, let's create a notification
+              if (permission === 'granted') {
+                let notification = new Notification('Message received');
+              }
+            });
+          }
+        }
+      });
+    });
+  });
 
   const chat = (snapkey) => {
-
     // snapkey = unique roomkey
     console.log(snapkey);
     const reciever = sessionStorage.getItem('variableName');
@@ -63,39 +91,38 @@ export default () => {
         textBox.value = '';
       }
 
-        const data = snapshot.val();
-        console.log(data);
+      const data = snapshot.val();
+      console.log(data);
 
-        // push value of invoering naar firebase
-       
-        // als er een child key is bijgekomen
+      // push value of invoering naar firebase
 
-        keyRef.on('child_added', handleChildAdded);
-        
-        // maak de html content
-        function handleChildAdded(data) {
-          const messageData = data.val();
-          const li = document.createElement('li');
+      // als er een child key is bijgekomen
 
-          li.innerHTML = messageData.message;
+      keyRef.on('child_added', handleChildAdded);
 
-          if (messageData.userId == sessionId) {
-            li.classList.add('other');
-          }
+      // maak de html content
+      function handleChildAdded(data) {
+        const messageData = data.val();
+        const li = document.createElement('li');
 
-          chats.appendChild(li);
-          chats.scrollTop = chats.scrollHeight;
+        li.innerHTML = messageData.message;
+
+        if (messageData.userId == sessionId) {
+          li.classList.add('other');
         }
 
-        // als er op enter gedrukt wordt, zorg voor een submit
-        textBox.addEventListener('keydown', handleKeyDown);
+        chats.appendChild(li);
+        chats.scrollTop = chats.scrollHeight;
+      }
 
-        function handleKeyDown(e) {
-          if (e.which === 13) {
-            handleSubmit(e);
-          }
+      // als er op enter gedrukt wordt, zorg voor een submit
+      textBox.addEventListener('keydown', handleKeyDown);
+
+      function handleKeyDown(e) {
+        if (e.which === 13) {
+          handleSubmit(e);
         }
-      
+      }
     });
   };
 
@@ -233,7 +260,7 @@ export default () => {
       menu.innerHTML = `
       <ul>
         <li class="contacts bold">
-                    <a href="/#/" data-navigo title="Hotels">Home</a>
+                    <a href="/#/home" data-navigo title="Hotels">Home</a>
         </li>
 
         <li class="partners bold">

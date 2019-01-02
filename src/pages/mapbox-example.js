@@ -59,7 +59,7 @@ export default () => {
       menu.innerHTML = `
       <ul>
         <li class="contacts bold">
-                    <a href="/#/" data-navigo title="Hotels">Home</a>
+                    <a href="/#/home" data-navigo title="Hotels">Home</a>
         </li>
 
         <li class="partners bold">

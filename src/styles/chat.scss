@@ -277,6 +277,7 @@ $size: 3rem;
   display: flex;
   align-items: center;
   padding: 1rem;
+  min-width: 300px;
   &:hover {
     background-color: rgba(0,0,0,0.025);
   }
@@ -290,6 +291,7 @@ $size: 3rem;
   }
   &__name {
     font-weight: bold;
+    padding-right: 10px;
   }
 }
 

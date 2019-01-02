@@ -121,7 +121,7 @@ export default () => {
       menu.innerHTML = `
       <ul>
         <li class="contacts bold">
-                    <a href="/#/" data-navigo title="Hotels">Home</a>
+                    <a href="/#/home" data-navigo title="Hotels">Home</a>
         </li>
 
         <li class="partners bold">
@@ -141,9 +141,8 @@ export default () => {
         <li class="logOut"><a href="#" id="logout"> Log Out</a></li>      </ul>
       `;
 
-      
-      createKot();
-      //rentKot();
+            //rentKot();
+            createKot();
 
 
       //        console.log(user.displayName);
@@ -160,6 +159,8 @@ export default () => {
   });
 
 
+  // basic elements for creating
+
   function createNode(element) {
     return document.createElement(element);
   }
@@ -167,7 +168,7 @@ export default () => {
   function append(parent, el) {
     return parent.appendChild(el);
   }
-// filter kot on distance
+
 
 
   // ONCLICK ADD USER AS ADMIN
@@ -430,10 +431,11 @@ export default () => {
     };
 
     kotPush.set(kotInfo);
-    window.location.replace('/#');
 
     modal.style.display = 'none';
     alert('kot is created');
+    location.reload();
+
   }
 
   // create post from database data
@@ -467,6 +469,32 @@ export default () => {
     });
   };
 
+  let kotRef = database.ref('content/');
+
+  // price
+    const filter = document.getElementById('order');
+    filter.addEventListener('change', () => {
+
+     if (filter.value === '-1') {
+        kotRef = database.ref('content/').orderByChild('Opp');
+        document.querySelector('#fullContent').innerHTML = '';
+      } 
+      if (filter.value === '-2') {
+        kotRef = database.ref('content/').orderByChild('Type');
+        document.querySelector('#fullContent').innerHTML = '';
+      } if (filter.value === '-3') {
+        kotRef = database.ref('content/').orderByChild('toUser');
+        document.querySelector('#fullContent').innerHTML = '';
+      }if (filter.value === '-4') {
+        kotRef = database.ref('content/').orderByChild('Prijs');
+        document.querySelector('#fullContent').innerHTML = '';
+      }
+
+      createKot();
+
+    });
+
+
   const createKot = () => {
     const rootRef = database.ref();
 
@@ -482,9 +510,10 @@ export default () => {
 
 
     });
+   
 
-    const urlRef = rootRef.child('content/');
-    urlRef.once('value', (snapshot) => {
+    const urlRef = rootRef.child('content/').orderByChild('time');
+    kotRef.once('value', (snapshot) => {
       snapshot.forEach((childSnapshot) => {
         const data = childSnapshot.val();
         console.log(data);
@@ -558,7 +587,6 @@ export default () => {
              `;
         append(ul, main);
 
-        price();
         
         firebase.auth().onAuthStateChanged((user) => {
           if (user) {
@@ -698,7 +726,7 @@ export default () => {
 
 
 
-  const ul = document.getElementById('flex-container');
+  const ul = document.getElementById('fullContent');
 
 
   // FILTERS
@@ -725,40 +753,6 @@ export default () => {
     });
   });
 
-  // price
-  const price = () => {
-    const filter = document.getElementById('order');
-    let kotRef;
-    console.log('yeet');
-    filter.addEventListener('change', () => {
-      if (filter.value === '1') {
-        kotRef = database.ref('content/');
-        document.querySelector('.product').style.display = 'block';
-      } else {
-        document.querySelector('.product').style.display = 'none';
-      } if (filter.value === '-1') {
-        kotRef = database.ref('content/').orderByChild('Opp');
-        console.log(kotRef);
-        document.querySelector('.product').style.display = 'block';
-      } else {
-        document.querySelector('.product').style.display = 'none';
-      }
-      if (filter.value === '-2') {
-        kotRef = database.ref('content/').orderByChild('Type');
-        console.log(kotRef);
-        document.querySelector('.product').style.display = 'none';
-      } else {
-        document.querySelector('.product').style.display = 'block';
-      }if (filter.value === '-3') {
-        kotRef = database.ref('content/').orderByChild('toUser');
-        console.log(kotRef);
-        document.querySelector('.product').style.display = 'none';
-      } else {
-        document.querySelector('.product').style.display = 'block';
-      }
-      
-    });
-  };
 
   // initially sort the element
 
