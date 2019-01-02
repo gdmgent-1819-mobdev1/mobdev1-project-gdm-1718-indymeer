@@ -73,7 +73,7 @@
 .product hr{
   opacity: 0.1;
 }
-.product .iconColor, .profileContainer .product .iconColor{
+.product .iconColor{
   color: $bodyColor;
   font-size: $bodyTitle;
 }
@@ -579,7 +579,6 @@
 .sidebar {
   background:#fcfcfc;
   max-height: 736px;
-  height: 736px;
   width: 250px;
   position: absolute;
   padding: 0 50px;
