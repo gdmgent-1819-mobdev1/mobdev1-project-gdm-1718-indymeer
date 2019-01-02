@@ -88,7 +88,7 @@ firebase.auth().onAuthStateChanged((user) => {
 
   // Fire back to home
   function toHome() {
-    window.location.replace('/home');
+    window.location.replace('/#home');
   }
 
   /*  database.on('value', (snapshot) => {
@@ -186,7 +186,7 @@ firebase.auth().onAuthStateChanged((user) => {
     let status = null;
 
     // CAMPUS COORDINATES
-    
+
     let long = 0;
     let lat = 0;
 
